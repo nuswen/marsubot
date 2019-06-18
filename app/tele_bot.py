@@ -11,7 +11,7 @@ def hi_msg(msg):
 
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
-    num = models.num.query.filter_by(id=1).first()
+    num = models.test.query.filter_by(id=1).first()
     poster(bot, msg.chat.id, 'message!'+str(num))
 
 
