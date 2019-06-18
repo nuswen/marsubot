@@ -12,7 +12,7 @@ def hi_msg(msg):
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
     num = models.test.query.filter_by(id=1).first()
-    poster(bot, msg.chat.id, 'message!'+str(num))
+    poster(bot, msg.chat.id, 'message!'+str(num.num))
 
 
 @bot.callback_query_handler(func=lambda call: True)
