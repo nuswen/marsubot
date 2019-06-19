@@ -6,7 +6,7 @@ from app import db
 
 @bot.message_handler(commands=['start'])
 def hi_msg(msg):
-    poster(bot, msg.chat.id, 'hi!')
+    poster(bot, msg.chat.id, msg)
 
 
 @bot.message_handler(content_types=['text'])
