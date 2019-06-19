@@ -16,3 +16,9 @@ class Messages(db.Model):
     ButtonText = db.Column(db.Text)
     TagAdd = db.Column(ARRAY(db.Text))
     TagRem = db.Column(ARRAY(db.Text))
+
+class Menu(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    IdMessage = db.Column(db.Integer)
+    ButtonLink = db.Column(db.Integer)
+    ButtonTextLink = db.Column(db.Integer)
