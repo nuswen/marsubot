@@ -22,3 +22,9 @@ class Menu(db.Model):
     IdMessage = db.Column(db.Integer)
     ButtonLink = db.Column(db.Integer)
     ButtonTextLink = db.Column(db.Integer)
+
+class Product(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    MessageId = db.Column(db.Integer)
+    DownloadLink = db.Column(db.Text)
+    FileId = db.Column(db.Text)
