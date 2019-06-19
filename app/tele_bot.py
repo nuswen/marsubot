@@ -12,6 +12,10 @@ def hi_msg(msg):
 def photo(msg):
     poster(bot, msg.chat.id, msg)
 
+@bot.message_handler(content_types=['document'])
+def photo(msg):
+    poster(bot, msg.chat.id, msg)
+
 
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
