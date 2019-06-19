@@ -8,6 +8,10 @@ from app import db
 def hi_msg(msg):
     poster(bot, msg.chat.id, msg)
 
+@bot.message_handler(content_types=['photo'])
+def photo(msg):
+    poster(bot, msg.chat.id, msg)
+
 
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
