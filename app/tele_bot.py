@@ -13,7 +13,7 @@ def photo(msg):
     poster(bot, msg.chat.id, msg)
 
 @bot.message_handler(content_types=['document'])
-def photo(msg):
+def doc(msg):
     poster(bot, msg.chat.id, msg)
 
 
