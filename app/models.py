@@ -8,3 +8,11 @@ class Teleusers(db.Model):
     Tunels = db.Column(ARRAY(db.Integer))
     TunelsLevel = db.Column(ARRAY(db.Integer))
     LastAct = db.Column(db.Integer)
+
+class Messages(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    Text = db.Column(db.Text)
+    Attach = db.Column(db.Text)
+    ButtonText = db.Column(db.Text)
+    TagAdd = db.Column(ARRAY(db.Text))
+    TagRem = db.Column(ARRAY(db.Text))
