@@ -21,7 +21,7 @@ def hi_msg(msg):
         productData = models.Product.filter_by(Id=productId).first()
         productFileId = productData.FileId
     else:
-        productFileId = command
+        productFileId = productId
 
     poster(bot, msg.chat.id, productFileId)
 
