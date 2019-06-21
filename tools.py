@@ -10,5 +10,5 @@ def msg_dwn_new_usr(productId):
     msgDate = models.messages.query.filter_by(Id = msgId).first()
     url = productData.ProductLink
     name = productData.ProductName
-    text = msgDate.Text % name + ' ' + url
+    text = msgDate.Text % (name + ' ' + url)
     return text
