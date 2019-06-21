@@ -26,5 +26,7 @@ class Menu(db.Model):
 class Product(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     MessageId = db.Column(db.Integer)
+    ProductName = db.Column(db.Text)
     DownloadLink = db.Column(db.Text)
     FileId = db.Column(db.Text)
+    Img = db.Column(db.Text)
