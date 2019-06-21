@@ -18,12 +18,12 @@ def hi_msg(msg):
 
     if command == 'dwn': # команда на скачивание продукта
         productId = int(msg.text[10:])
-        productData = models.product.query.filter_by(Id = 1).first()
-        productFileId = productData.FileId()
+        productData = models.product.query.filter_by(Id = productId).first()
+        #productFileId = productData.FileId()
     else:
         productFileId = 0
 
-    poster(bot, msg.chat.id, productId)
+    poster(bot, msg.chat.id, producproductDatatId)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
