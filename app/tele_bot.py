@@ -36,6 +36,8 @@ def hi_msg(msg):
         else:
             msgStart = msg_start('start')
             poster(bot, msg.chat.id, msgStart)
+    
+    poster(bot, msg.chat.id, command)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
