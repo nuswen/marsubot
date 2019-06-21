@@ -4,7 +4,7 @@ from app import db
 
 
 def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, message_id=None, doc=None):
-    if addTag|remTag:
+    if addTag or remTag:
         usr = models.teleusers.query.filter_by(Id = chatId).first()
         tags = usr.Tags
         for i in addTag:
