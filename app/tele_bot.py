@@ -23,7 +23,7 @@ def hi_msg(msg):
     else:
         productFileId = 0
 
-    poster(bot, msg.chat.id, producproductDatatId)
+    poster(bot, msg.chat.id, productData)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
