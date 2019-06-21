@@ -21,13 +21,13 @@ def hi_msg(msg):
     if command == 'dwn': # команда на скачивание продукта
         try:
             productId = int(msg.text[10:])
-            msgGo, addTag, remTag = msg_dwn_new_usr(productId)
+            msgGo, addTag, remTag = msg_dwn_usr(productId)
             productData = models.product.query.filter_by(Id = productId).first()
             productFileId = productData.FileIdTelega
             new_user(msg.from_user.id)
             poster(bot, msg.chat.id, msgGo, addTag= addTag, remTag=remTag, doc=productFileId)
-        except:
-            command = '000'
+        except Exception as e:
+            poster(bot, msg.chat.id, e)
     else:
         productFileId = 0
 
@@ -35,6 +35,7 @@ def hi_msg(msg):
         msgStart = msg_start
         tfExUser = new_user(msg.from_user.id)
         if tfExUser == 'exUser':
+
             poster(bot, msg.chat.id, msgContinue)
         else:
             poster(bot, msg.chat.id, msgStart)

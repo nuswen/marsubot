@@ -2,7 +2,7 @@ from app import db
 from app import models
 from set import *
 
-def msg_dwn_new_usr(productId):
+def msg_dwn_usr(productId):
     """
     Принимает Id продукта и отдает составленное сообщение для отправки
     """
