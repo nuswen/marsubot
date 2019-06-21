@@ -25,7 +25,7 @@ def hi_msg(msg):
             msgGo, addTag, remTag = msg_dwn_usr(productId)
             productData = models.product.query.filter_by(Id = productId).first()
             productFileId = productData.FileIdTelega
-            poster(bot, msg.chat.id, msg_start(new_tele_user()))
+            poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
             poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
         except:
             command == '000'
@@ -33,7 +33,7 @@ def hi_msg(msg):
         command = '000'
 
     if command == '000':
-            poster(bot, msg.chat.id, msg_start(new_tele_user()))
+            poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
