@@ -40,7 +40,7 @@ def keyboarder(keys):
     return keyboard
 
 
-def new_user(usrId, tags):
+def new_user(usrId):
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
         return 'exUser'
