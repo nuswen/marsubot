@@ -23,7 +23,7 @@ class Menu(db.Model):
     ButtonLink = db.Column(db.Integer)
     ButtonTextLink = db.Column(db.Integer)
 
-class Product(db.Model):
+class product(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     MessageId = db.Column(db.Integer)
     ProductName = db.Column(db.Text)
