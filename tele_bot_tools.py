@@ -6,7 +6,10 @@ from app import db
 def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, message_id=None, doc=None):
     if addTag or remTag:
         usr = models.teleusers.query.filter_by(Id = chatId).first()
-        tags = usr.Tags
+        if not usr.Tags:
+            tags = []
+        else:
+            tags = usr.Tags
         if addTag:
             for i in addTag:
                 if i not in tags:

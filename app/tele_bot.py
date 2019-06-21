@@ -27,7 +27,7 @@ def hi_msg(msg):
             new_user(msg.from_user.id)
             poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
         except Exception as e:
-            poster(bot, msg.chat.id, type(addTag))
+            poster(bot, msg.chat.id, e)
     else:
         productFileId = 0
 
