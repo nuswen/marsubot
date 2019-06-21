@@ -25,7 +25,7 @@ def hi_msg(msg):
             productData = models.product.query.filter_by(Id = productId).first()
             productFileId = productData.FileIdTelega
             new_user(msg.from_user.id)
-            poster(bot, msg.chat.id, msgGo, addTag= addTag,r emTag=remTag, doc=productFileId)
+            poster(bot, msg.chat.id, msgGo, addTag= addTag, remTag=remTag, doc=productFileId)
         except:
             command = '000'
     else:
