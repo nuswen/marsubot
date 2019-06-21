@@ -2,14 +2,14 @@ from app import db
 from sqlalchemy.dialects.postgresql import ARRAY
 
 
-class Teleusers(db.Model):
+class teleusers(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Tags = db.Column(ARRAY(db.Text))
     Tunels = db.Column(ARRAY(db.Integer))
     TunelsLevel = db.Column(ARRAY(db.Integer))
     LastAct = db.Column(db.Integer)
 
-class Messages(db.Model):
+class messages(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Text = db.Column(db.Text)
     Attach = db.Column(db.Text)
@@ -17,7 +17,7 @@ class Messages(db.Model):
     TagAdd = db.Column(ARRAY(db.Text))
     TagRem = db.Column(ARRAY(db.Text))
 
-class Menu(db.Model):
+class menu(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     IdMessage = db.Column(db.Integer)
     ButtonLink = db.Column(db.Integer)
