@@ -6,8 +6,24 @@ from app import db
 
 @bot.message_handler(commands=['start'])
 def hi_msg(msg):
-    command = msg.text[6:10]
-    poster(bot, msg.chat.id, command)
+    """
+    Стартовое сообщение дополнительно кодируется xxx*, где xxx команда, а * любая доп
+    информация
+    """
+
+    try:
+        command = msg.text[6:10] # ищем комманду в стартовом сообщении
+    except:
+        command = '000' # если сообщение не кодировано, скидываем в вариант по умолчанию
+
+    if command == 'dwn': # команда на скачивание продукта
+        productId = int(msg.text[10:])
+        productData = models.Product.filter_by(Id=productId).first()
+        productFileId = productData.FileId
+    else:
+        pass
+
+    poster(bot, msg.chat.id, productFileId)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
