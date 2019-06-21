@@ -3,6 +3,7 @@ from tools import *
 from app import models
 from app import bot
 from app import db
+from set import *
 
 
 @bot.message_handler(commands=['start'])
@@ -18,14 +19,25 @@ def hi_msg(msg):
         command = '000' # если сообщение не кодировано, скидываем в вариант по умолчанию
 
     if command == 'dwn': # команда на скачивание продукта
-        productId = int(msg.text[10:])
-        msgGo = msg_dwn_new_usr(productId)
-        productData = models.product.query.filter_by(Id = productId).first()
-        productFileId = productData.FileIdTelega
+        try:
+            productId = int(msg.text[10:])
+            msgGo = msg_dwn_new_usr(productId)
+            productData = models.product.query.filter_by(Id = productId).first()
+            productFileId = productData.FileIdTelega
+            new_user(msg.from_user.id)
+            poster(bot, msg.chat.id, msgGo, doc=productFileId)
+        except:
+            command = '000'
     else:
         productFileId = 0
 
-    poster(bot, msg.chat.id, msgGo, doc=productFileId)
+    if command == '000':
+        msgStart = msg_start
+        tfExUser = new_user(msg.from_user.id, newbieTags)
+        if tfExUser == 'exUser':
+            poster(bot, msg.chat.id, msgContinue)
+        else:
+            poster(bot, msg.chat.id, msgStart)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):

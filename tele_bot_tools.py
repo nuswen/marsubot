@@ -1,21 +1,36 @@
 from telebot import types
+from app import models
+from app import db
 
 
-def poster(bot, chat_id, text, buttons=None, ed=False, message_id=None, doc=None):
+def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, message_id=None, doc=None):
+    if addTag|remTag:
+        usr = models.teleusers.query.filter_by(Id = chatId).first()
+        tags = usr.Tags
+        for i in addTag:
+            if i not in tags:
+                tags.append(i)
+        for i in tags:
+            if i in remTag:
+                tags.remove(i)
+        usr.Tags = tags
+        db.session.add(usr)
+        db.session.commit()
+    
     if buttons:
         if ed:
-            bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text, reply_markup=keyboarder(buttons))
+            bot.edit_message_text(chat_id=chatId, message_id=message_id, text=text, reply_markup=keyboarder(buttons))
         else:
-            bot.send_message(chat_id, text, reply_markup=keyboarder(buttons))
+            bot.send_message(chatId, text, reply_markup=keyboarder(buttons))
             if doc:
-                bot.send_document(chat_id=chat_id, data=doc)
+                bot.send_document(chat_id=chatId, data=doc)
     else:
         if ed:
-            bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text)
+            bot.edit_message_text(chat_id=chatId, message_id=message_id, text=text)
         else:
-            bot.send_message(chat_id, text)
+            bot.send_message(chatId, text)
             if doc:
-                bot.send_document(chat_id=chat_id, data=doc)
+                bot.send_document(chat_id=chatId, data=doc)
 
 
 def keyboarder(keys):
@@ -25,8 +40,10 @@ def keyboarder(keys):
     return keyboard
 
 
-def get_phone_number(bot, chat_id, text):
-    keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    button_phone = types.KeyboardButton(text="Отправить номер телефона", request_contact=True)
-    keyboard.add(button_phone)
-    bot.send_message(chat_id, text, reply_markup=keyboard)
+def new_user(usrId, tags):
+    exUser = models.teleusers.query.filter_by(Id = usrId).first()
+    if exUser:
+        return 'exUser'
+    newUser = models.teleusers(Id = usrId, Tags = tags)
+    db.session.add(newUser)
+    db.session.commit()
