@@ -21,9 +21,9 @@ def hi_msg(msg):
         productData = models.Product.filter_by(Id=productId).first()
         productFileId = productData.FileId
     else:
-        productFileId = productId
+        productFileId = 0
 
-    poster(bot, msg.chat.id, productFileId)
+    poster(bot, msg.chat.id, command == 'dwn')
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
