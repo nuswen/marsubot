@@ -27,6 +27,8 @@ def hi_msg(msg):
             poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
         except:
             command == '000'
+    else:
+        command = '000'
 
     if command == '000':
         tfExUser = new_user(msg.from_user.id)
