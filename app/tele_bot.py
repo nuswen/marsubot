@@ -6,7 +6,7 @@ from app import db
 
 @bot.message_handler(commands=['start'])
 def hi_msg(msg):
-    command = msg.text[6:]
+    command = msg.text[6:9]
     poster(bot, msg.chat.id, command)
 
 @bot.message_handler(content_types=['photo'])
