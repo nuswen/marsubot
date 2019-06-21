@@ -10,6 +10,13 @@ def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, 
             tags = []
         else:
             tags = usr.Tags
+
+        if not addTag:
+            addTag = []
+
+        if not remTag:
+            remTag = []
+        
         if addTag:
             for i in addTag:
                 if i not in tags:
