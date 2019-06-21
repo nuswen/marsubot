@@ -28,7 +28,7 @@ def hi_msg(msg):
             poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
             poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
         except:
-            command == '000'
+            command = '000'
     else:
         command = '000'
 
