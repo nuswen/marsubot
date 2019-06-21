@@ -21,7 +21,7 @@ def hi_msg(msg):
         productId = int(msg.text[10:])
         msgGo = msg_dwn_new_usr(productId)
         productData = models.product.query.filter_by(Id = productId).first()
-        productFileId = productData.FileId
+        productFileId = productData.FileIdTelega
     else:
         productFileId = 0
 
