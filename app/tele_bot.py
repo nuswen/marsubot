@@ -5,6 +5,8 @@ from app import bot
 from app import db
 
 
+
+
 @bot.message_handler(commands=['start'])
 def hi_msg(msg):
     """
@@ -23,7 +25,7 @@ def hi_msg(msg):
             msgGo, addTag, remTag = msg_dwn_usr(productId)
             productData = models.product.query.filter_by(Id = productId).first()
             productFileId = productData.FileIdTelega
-            new_user(msg.from_user.id)
+            poster(bot, msg.chat.id, msg_start(new_tele_user()))
             poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
         except:
             command == '000'
@@ -31,13 +33,7 @@ def hi_msg(msg):
         command = '000'
 
     if command == '000':
-        tfExUser = new_user(msg.from_user.id)
-        if tfExUser == 'exUser':
-            msgContinue = msg_start('continue')
-            poster(bot, msg.chat.id, msgContinue)
-        else:
-            msgStart = msg_start('start')
-            poster(bot, msg.chat.id, msgStart)
+            poster(bot, msg.chat.id, msg_start(new_tele_user()))
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):

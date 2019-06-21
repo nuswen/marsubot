@@ -55,7 +55,8 @@ def keyboarder(keys):
 def new_user(usrId):
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
-        return 'exUser'
+        return 'continue'
     newUser = models.teleusers(Id = usrId)
     db.session.add(newUser)
     db.session.commit()
+    return 'start'
