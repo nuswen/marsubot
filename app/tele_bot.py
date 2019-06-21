@@ -1,4 +1,5 @@
 from tele_bot_tools import *
+from tools import *
 from app import models
 from app import bot
 from app import db
@@ -18,12 +19,13 @@ def hi_msg(msg):
 
     if command == 'dwn': # команда на скачивание продукта
         productId = int(msg.text[10:])
+        msgGo = msg_dwn_new_usr(productId)
         productData = models.product.query.filter_by(Id = productId).first()
         productFileId = productData.FileId
     else:
         productFileId = 0
 
-    poster(bot, msg.chat.id, productFileId)
+    poster(bot, msg.chat.id, msgGo)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):

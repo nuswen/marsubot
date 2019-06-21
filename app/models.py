@@ -28,5 +28,5 @@ class product(db.Model):
     MessageId = db.Column(db.Integer)
     ProductName = db.Column(db.Text)
     DownloadLink = db.Column(db.Text)
-    FileId = db.Column(db.Text)
+    FileIdTelega = db.Column(db.Text)
     Img = db.Column(db.Text)
