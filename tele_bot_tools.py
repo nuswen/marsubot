@@ -44,6 +44,6 @@ def new_user(usrId):
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
         return 'exUser'
-    newUser = models.teleusers(Id = usrId, Tags = tags)
+    newUser = models.teleusers(Id = usrId)
     db.session.add(newUser)
     db.session.commit()
