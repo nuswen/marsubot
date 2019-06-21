@@ -3,7 +3,6 @@ from tools import *
 from app import models
 from app import bot
 from app import db
-from set import *
 
 
 @bot.message_handler(commands=['start'])
@@ -26,18 +25,16 @@ def hi_msg(msg):
             productFileId = productData.FileIdTelega
             new_user(msg.from_user.id)
             poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
-        except Exception as e:
-            poster(bot, msg.chat.id, e)
-    else:
-        productFileId = 0
+        except:
+            command == '000'
 
     if command == '000':
-        msgStart = msg_start
         tfExUser = new_user(msg.from_user.id)
         if tfExUser == 'exUser':
-
+            msgContinue = msg_start('continue')
             poster(bot, msg.chat.id, msgContinue)
         else:
+            msgStart = msg_start('start')
             poster(bot, msg.chat.id, msgStart)
 
 @bot.message_handler(content_types=['photo'])

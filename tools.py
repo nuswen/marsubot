@@ -15,7 +15,10 @@ def msg_dwn_usr(productId):
     remTags = msgDate.TagRem
     return text, addTags, remTags
 
-def msg_start():
-    msgDate = models.messages.query.filter_by(Id = startMessage).first()
+def msg_start(first):
+    if first == 'start':
+        msgDate = models.messages.query.filter_by(Id = startMessage).first()
+    elif first == 'continue':
+        msgDate = models.messages.query.filter_by(Id = msgContinue).first()
     text = msgDate.Text
     return text
