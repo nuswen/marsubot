@@ -18,8 +18,8 @@ def hi_msg(msg):
 
     if command == 'dwn': # команда на скачивание продукта
         productId = int(msg.text[10:])
-        #productData = models.Product.query.filter_by(Id=productId).first()
-        #productFileId = productData.FileId()
+        productData = models.Product.query.filter_by(Id=productId).first()
+        productFileId = productData.FileId()
     else:
         productFileId = 0
 
