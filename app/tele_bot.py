@@ -21,11 +21,11 @@ def hi_msg(msg):
     if command == 'dwn': # команда на скачивание продукта
         try:
             productId = int(msg.text[10:])
-            msgGo = msg_dwn_new_usr(productId)
+            msgGo, addTag, remTag = msg_dwn_new_usr(productId)
             productData = models.product.query.filter_by(Id = productId).first()
             productFileId = productData.FileIdTelega
             new_user(msg.from_user.id)
-            poster(bot, msg.chat.id, msgGo, doc=productFileId)
+            poster(bot, msg.chat.id, msgGo, addTag= addTag,r emTag=remTag, doc=productFileId)
         except:
             command = '000'
     else:

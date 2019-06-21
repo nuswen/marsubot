@@ -11,7 +11,9 @@ def msg_dwn_new_usr(productId):
     msgDate = models.messages.query.filter_by(Id = msgId).first()
     name = productData.ProductName
     text = msgDate.Text % name
-    return text
+    addTags = msgDate.TagAdd
+    remTags = msgDate.TagRem
+    return text, addTags, remTags
 
 def msg_start():
     msgDate = models.messages.query.filter_by(Id = startMessage).first()
