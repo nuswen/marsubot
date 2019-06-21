@@ -52,7 +52,7 @@ def keyboarder(keys):
     return keyboard
 
 
-def new_user(usrId):
+def new_tele_user(usrId):
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
         return 'continue'
