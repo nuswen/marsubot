@@ -7,12 +7,14 @@ def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, 
     if addTag or remTag:
         usr = models.teleusers.query.filter_by(Id = chatId).first()
         tags = usr.Tags
-        for i in addTag:
-            if i not in tags:
-                tags.append(i)
-        for i in tags:
-            if i in remTag:
-                tags.remove(i)
+        if addTag:
+            for i in addTag:
+                if i not in tags:
+                    tags.append(i)
+        elif remTag:
+            for i in tags:
+                if i in remTag:
+                    tags.remove(i)
         usr.Tags = tags
         db.session.add(usr)
         db.session.commit()
