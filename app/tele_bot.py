@@ -12,7 +12,7 @@ def hi_msg(msg):
     """
 
     try:
-        command = msg.text[6:10] # ищем комманду в стартовом сообщении
+        command = msg.text[7:10] # ищем комманду в стартовом сообщении
     except:
         command = '000' # если сообщение не кодировано, скидываем в вариант по умолчанию
 
@@ -23,7 +23,7 @@ def hi_msg(msg):
     else:
         productFileId = 0
 
-    poster(bot, msg.chat.id, str(len(command))+msg.text)
+    poster(bot, msg.chat.id, productFileId)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
