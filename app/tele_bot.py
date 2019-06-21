@@ -33,7 +33,7 @@ def hi_msg(msg):
 
     if command == '000':
         msgStart = msg_start
-        tfExUser = new_user(msg.from_user.id, newbieTags)
+        tfExUser = new_user(msg.from_user.id)
         if tfExUser == 'exUser':
             poster(bot, msg.chat.id, msgContinue)
         else:
