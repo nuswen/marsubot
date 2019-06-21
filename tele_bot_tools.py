@@ -1,17 +1,19 @@
 from telebot import types
 
 
-def poster(bot, chat_id, text, buttons=None, ed=False, message_id=None):
+def poster(bot, chat_id, text, buttons=None, ed=False, message_id=None, doc=None):
     if buttons:
         if ed:
             bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text, reply_markup=keyboarder(buttons))
         else:
-            bot.send_message(chat_id, text, reply_markup=keyboarder(buttons))
+            bot.send_message(chat_id, text, , reply_markup=keyboarder(buttons))
     else:
         if ed:
             bot.edit_message_text(chat_id=chat_id, message_id=message_id, text=text)
         else:
             bot.send_message(chat_id, text)
+            if doc:
+                bot.send_document(chat_id=chat_id, data=doc)
 
 
 def keyboarder(keys):
