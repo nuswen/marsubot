@@ -57,4 +57,6 @@ def any_messages(msg):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    pass
+    textDate, buttons = menu_builder(call)
+    poster(bot, msg.chat.id, textDate.Text, addTag=textDate.TagAdd, 
+    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach)
