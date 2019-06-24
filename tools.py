@@ -29,8 +29,9 @@ def menu_builder(call):
     nextPoint = (menuDate.Id * 10) + 1
     buttons = []
     for i in range(nextPoint,nextPoint+9):
-        buttonDate = models.messages.query.filter_by(Id = i).first()
-        if buttonDate:
+        buttonMenuDate = models.menu.query.filter_by(Id = i).first()
+        if buttonMenuDate:
+            buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
             buttonText = buttonDate.ButtonText
             buttonLink = i
             buttons.append([buttonText, buttonLink])
