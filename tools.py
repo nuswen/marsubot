@@ -36,7 +36,8 @@ def menu_builder(call):
             buttonLink = i
             buttons.append([buttonText, buttonLink])
     
-    buttonDate = models.messages.query.filter_by(Id = 1).first()
+    buttonMenuDate = models.menu.query.filter_by(Id = 1).first()
+    buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
     buttonText = buttonDate.ButtonText
     buttonLink = 1
     buttons.append([buttonText, buttonLink])
