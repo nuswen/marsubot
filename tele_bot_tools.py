@@ -48,11 +48,15 @@ def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, 
 def keyboarder(keys):
     keyboard = types.InlineKeyboardMarkup()
     for key in keys:
-        keyboard.add(types.InlineKeyboardButton(text=key[1], callback_data=key[2]))
+        keyboard.add(types.InlineKeyboardButton(text=key[0], callback_data=key[1]))
     return keyboard
 
 
 def new_tele_user(usrId):
+    '''
+    Пытается добавить нового юзера в базу - возвращает start если вышло, если юзверь 
+    уже есть - continue
+    '''
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
         return 'continue'

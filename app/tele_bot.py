@@ -35,6 +35,12 @@ def hi_msg(msg):
     if command == '000':
             poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
 
+@bot.message_handler(commands=['menu'])
+def menu(msg):
+    textDate, buttons = menu_builder(1)
+    poster(bot, msg.chat.id, textDate.Text, addTag=textDate.TagAdd, 
+    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach)
+
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
     poster(bot, msg.chat.id, msg)

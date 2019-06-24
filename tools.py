@@ -22,3 +22,22 @@ def msg_start(first):
         msgDate = models.messages.query.filter_by(Id = msgContinue).first()
     text = msgDate.Text
     return text
+
+def menu_builder(call):
+    menuDate = models.menu.query.filter_by(Id = call).first()
+    textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
+    nextPoint = (menuDate.Id * 10) + 1
+    buttons = []
+    for i in range(nextPoint,nextPoint+9):
+        buttonDate = models.messages.query.filter_by(Id = i).first()
+        if buttonDate:
+            buttonText = buttonDate.ButtonText
+            buttonLink = i
+            buttons.append([buttonText, buttonLink])
+    
+    buttonDate = models.messages.query.filter_by(Id = 1).first()
+    buttonText = buttonDate.ButtonText
+    buttonLink = 1
+    buttons.append([buttonText, buttonLink])
+
+    return textDate, buttons
