@@ -37,7 +37,7 @@ def menu_builder(call):
             buttonText = buttonDate.ButtonText
             buttonLink = i
             buttons.append([buttonText, buttonLink])
-    if call != "1":
+    if call != "1" and int(call) > 1000000000:
         buttonMenuDate = models.menu.query.filter_by(Id = 1).first()
         buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
         buttonText = buttonDate.ButtonText
