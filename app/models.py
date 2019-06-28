@@ -16,6 +16,7 @@ class messages(db.Model):
     ButtonText = db.Column(db.Text)
     TagAdd = db.Column(ARRAY(db.Text))
     TagRem = db.Column(ARRAY(db.Text))
+    Img = db.Column(db.Text)
 
 class menu(db.Model):
     Id = db.Column(db.Integer, primary_key=True)

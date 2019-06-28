@@ -3,7 +3,8 @@ from app import models
 from app import db
 
 
-def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, message_id=None, doc=None):
+def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, 
+ed=False, message_id=None, doc=None, img=None):
     if addTag or remTag:
         usr = models.teleusers.query.filter_by(Id = chatId).first()
         if not usr.Tags:
@@ -30,16 +31,20 @@ def poster(bot, chatId, text, addTag=None, remTag=None, buttons=None, ed=False, 
         db.session.commit()
     
     if buttons:
-        if ed:
+        if ed and not img and not doc:
             bot.edit_message_text(chat_id=chatId, message_id=message_id, text=text, reply_markup=keyboarder(buttons))
         else:
+            if img:
+                bot.send_photo(chat_id=chatId, data=img)
             bot.send_message(chatId, text, reply_markup=keyboarder(buttons))
             if doc:
                 bot.send_document(chat_id=chatId, data=doc)
     else:
-        if ed:
+        if ed and not img and not doc:
             bot.edit_message_text(chat_id=chatId, message_id=message_id, text=text)
         else:
+            if img:
+                bot.send_photo(chat_id=chatId, data=img)
             bot.send_message(chatId, text)
             if doc:
                 bot.send_document(chat_id=chatId, data=doc)

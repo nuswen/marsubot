@@ -22,11 +22,12 @@ def hi_msg(msg):
     if command == 'dwn': # команда на скачивание продукта
         try:
             productId = int(msg.text[10:])
-            msgGo, addTag, remTag = msg_dwn_usr(productId)
+            msgGo, msgDate = msg_dwn_usr(productId)
             productData = models.product.query.filter_by(Id = productId).first()
             productFileId = productData.FileIdTelega
             poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
-            poster(bot, msg.chat.id, msgGo, addTag=addTag, remTag=remTag, doc=productFileId)
+            poster(bot, msg.chat.id, msgGo, addTag=msgDate.TagAdd, remTag=msgDate.TagRem, 
+            doc=productFileId, img=msgDate.Img)
         except:
             command = '000'
     else:
@@ -37,9 +38,15 @@ def hi_msg(msg):
 
 @bot.message_handler(commands=['menu'])
 def menu(msg):
-    textDate, buttons = menu_builder(1)
+    textDate, buttons = menu_builder(0)
     poster(bot, msg.chat.id, textDate.Text, addTag=textDate.TagAdd, 
-    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach)
+    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img=textDate.Img)
+
+@bot.message_handler(commands=['smenu'])
+def smenu(msg):
+    textDate, buttons = menu_builder(1000000000)
+    poster(bot, msg.chat.id, textDate.Text, addTag=textDate.TagAdd, 
+    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img=textDate.Img)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
@@ -59,4 +66,4 @@ def any_messages(msg):
 def callback_inline(call):
     textDate, buttons = menu_builder(call.data)
     poster(bot, call.message.chat.id, textDate.Text, addTag=textDate.TagAdd, 
-    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach)
+    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img)
