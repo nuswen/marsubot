@@ -24,6 +24,8 @@ def msg_start(first):
 def menu_builder(call):
     try:
         call = int(call)
+    except:
+        pass
     menuDate = models.menu.query.filter_by(Id = call).first()
     textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
     nextPoint = (menuDate.Id * 10) + 1
