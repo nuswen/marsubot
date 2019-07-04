@@ -39,13 +39,13 @@ def menu_builder(call):
             buttons.append([buttonText, buttonLink])
 
     strCall = str(call)
-    if strCall != "1" and strCall[:1] != "9":
+    if strCall != "1" and strCall[:1] == "1":
         buttonMenuDate = models.menu.query.filter_by(Id = 1).first()
         buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
         buttonText = buttonDate.ButtonText
         buttonLink = 1
         buttons.append([buttonText, buttonLink])
-    elif strCall[:1] == "9":
+    elif strCall != "9" and strCall[:1] == "9":
         buttonMenuDate = models.menu.query.filter_by(Id = 9).first()
         buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
         buttonText = buttonDate.ButtonText
