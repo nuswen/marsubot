@@ -4,9 +4,6 @@ from app import models
 from app import bot
 from app import db
 
-
-
-
 @bot.message_handler(commands=['start'])
 def hi_msg(msg):
     """
