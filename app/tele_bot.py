@@ -61,6 +61,6 @@ def any_messages(msg):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    textDate, buttons = menu_builder(call.data)
+    textDate, buttons = menu_builder(call.data, call.message.chat.id)
     poster(bot, call.message.chat.id, (textDate.Text), addTag=textDate.TagAdd, 
     remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img)
