@@ -22,6 +22,7 @@ def msg_start(first):
     return text
 
 def menu_builder(call, user = None):
+    buttons = []
     try:
         call = int(call)
     except:
@@ -45,7 +46,6 @@ def menu_builder(call, user = None):
             
     else:
         nextPoint = (menuDate.Id * 10) + 1
-        buttons = []
         for i in range(nextPoint,nextPoint+9):
           buttonMenuDate = models.menu.query.filter_by(Id = i).first()
           if buttonMenuDate:
