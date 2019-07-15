@@ -21,8 +21,7 @@ class messages(db.Model):
 class menu(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     IdMessage = db.Column(db.Integer)
-    ButtonLink = db.Column(db.Integer)
-    ButtonTextLink = db.Column(db.Integer)
+    SpecAction = db.Column(db.Text)
 
 class product(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
