@@ -27,16 +27,17 @@ def menu_builder(call):
     except:
         pass
     menuDate = models.menu.query.filter_by(Id = call).first()
-    if menuDate.SpecAction == 'hi message newbie':
+    textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
+        
+        if menuDate.SpecAction == 'hi message newbie':
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
-        textDate.Text = hiMessageNewbieStart % curMsg
+        textDate.Text = textDate.Text % curMsg
         call = str(call)
         prevMenu = int(call[:-1])
-        buttons = [['Отмена',prevMenu]]
+        buttons = [['Отмена',prevMenu]] # реализовать добавление в конце
         return textDate, buttons
 
-    textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
     nextPoint = (menuDate.Id * 10) + 1
     buttons = []
     for i in range(nextPoint,nextPoint+9):
