@@ -30,3 +30,8 @@ class product(db.Model):
     DownloadLink = db.Column(db.Text)
     FileIdTelega = db.Column(db.Text)
     Img = db.Column(db.Text)
+
+class waitlist(db.Model):
+    Id = db.Column(db.Integer, primary_key=True)
+    WhatWait = db.Column(db.Text)
+    From = db.Column(db.Text)

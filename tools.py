@@ -21,7 +21,7 @@ def msg_start(first):
     text = msgDate.Text
     return text
 
-def menu_builder(call):
+def menu_builder(call, user = None):
     try:
         call = int(call)
     except:
@@ -34,22 +34,32 @@ def menu_builder(call):
         curMsg = curMsg.Text
         temp = str(textDate.Text)
         textDate.Text = temp % curMsg
-        call = str(call)
-        prevMenu = int(call[:-1])
-        buttons = [['Отмена',prevMenu]] # реализовать добавление в конце
-        return textDate, buttons
+        if not user:
+            waitUser = models.waitlist.query.filter_by(Id = user).first()
+            if waitUser:
+                db.session.delete(waitUser)
+                db.session.commit()
+            newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie')
+            db.session.add(newUser)
+            db.session.commit()
+            
+    else:
+        nextPoint = (menuDate.Id * 10) + 1
+        buttons = []
+        for i in range(nextPoint,nextPoint+9):
+          buttonMenuDate = models.menu.query.filter_by(Id = i).first()
+          if buttonMenuDate:
+              buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
+              buttonText = buttonDate.ButtonText
+               buttonLink = i
+               buttons.append([buttonText, buttonLink])
 
-    nextPoint = (menuDate.Id * 10) + 1
-    buttons = []
-    for i in range(nextPoint,nextPoint+9):
-        buttonMenuDate = models.menu.query.filter_by(Id = i).first()
-        if buttonMenuDate:
-            buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
-            buttonText = buttonDate.ButtonText
-            buttonLink = i
-            buttons.append([buttonText, buttonLink])
+        strCall = str(call)
+    
+    call = str(call)
+    prevMenu = int(call[:-1])
+    buttons.append([backText, prevMenu]) #TODO добавить удаление из waitlist при нажатии
 
-    strCall = str(call)
     if strCall != "1" and strCall[:1] == "1":
         buttonMenuDate = models.menu.query.filter_by(Id = 1).first()
         buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
