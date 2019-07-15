@@ -51,8 +51,8 @@ def menu_builder(call, user = None):
           if buttonMenuDate:
               buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
               buttonText = buttonDate.ButtonText
-               buttonLink = i
-               buttons.append([buttonText, buttonLink])
+              buttonLink = i
+              buttons.append([buttonText, buttonLink])
 
         strCall = str(call)
     
