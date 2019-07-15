@@ -40,9 +40,9 @@ def menu_builder(call, user = None):
             if waitUser:
                 db.session.delete(waitUser)
                 db.session.commit()
-            newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie')
-            db.session.add(newUser)
-            db.session.commit()
+        newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie')
+        db.session.add(newUser)
+        db.session.commit()
             
     else:
         nextPoint = (menuDate.Id * 10) + 1
