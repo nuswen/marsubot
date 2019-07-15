@@ -30,7 +30,7 @@ def menu_builder(call):
     if menuDate.SpecAction == 'hi message newbie':
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
-        textDate = curMsg
+        textDate.Text = hiMessageNewbieStart % curMsg
         call = str(call)
         prevMenu = int(call[:-1])
         buttons = [['Отмена',prevMenu]]
