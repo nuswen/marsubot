@@ -29,7 +29,7 @@ def menu_builder(call):
     menuDate = models.menu.query.filter_by(Id = call).first()
     textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
         
-        if menuDate.SpecAction == 'hi message newbie':
+    if menuDate.SpecAction == 'hi message newbie':
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
         textDate.Text = textDate.Text % curMsg
