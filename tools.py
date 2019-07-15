@@ -33,7 +33,7 @@ def menu_builder(call):
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
         temp = str(textDate.Text)
-        textDate.Text = str(call)
+        textDate.Text = temp
         call = str(call)
         prevMenu = int(call[:-1])
         buttons = [['Отмена',prevMenu]] # реализовать добавление в конце
