@@ -54,8 +54,7 @@ def menu_builder(call, user = None):
               buttonLink = i
               buttons.append([buttonText, buttonLink])
 
-        strCall = str(call)
-    
+    strCall = str(call)
     call = str(call)
     prevMenu = int(call[:-1])
     buttons.append([backText, prevMenu]) #TODO добавить удаление из waitlist при нажатии
