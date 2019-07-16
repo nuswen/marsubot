@@ -27,6 +27,7 @@ def wait_list_cls(user):
     db.session.commit()
 
 def menu_builder(call, user = None):
+    BckStartBtn = True
     buttons = []
     text = None
     try:
@@ -37,6 +38,7 @@ def menu_builder(call, user = None):
     textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
         
     if menuDate.SpecAction == 'hi message newbie':
+        BckStartBtn = False
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
         text = str(textDate.Text)
@@ -60,18 +62,19 @@ def menu_builder(call, user = None):
               buttonLink = i
               buttons.append([buttonText, buttonLink])
 
-    strCall = str(call)
-    call = str(call)
-    prevMenu = '0' + call[:-1]
-    buttons.append([backText, prevMenu]) #TODO добавить удаление из waitlist при нажатии
+    if len(strCall) != 1:
+        strCall = str(call)
+        call = str(call)
+        prevMenu = '0' + call[:-1]
+        buttons.append([backText, prevMenu]) 
 
-    if strCall != "1" and strCall[:1] == "1":
+    if strCall != "1" and strCall[:1] == "1" and BckStartBtn:
         buttonMenuDate = models.menu.query.filter_by(Id = 1).first()
         buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
         buttonText = buttonDate.ButtonText
         buttonLink = 1
         buttons.append([buttonText, buttonLink])
-    elif strCall != "9" and strCall[:1] == "9":
+    elif strCall != "9" and strCall[:1] == "9" and BckStartBtn:
         buttonMenuDate = models.menu.query.filter_by(Id = 9).first()
         buttonDate = models.messages.query.filter_by(Id = buttonMenuDate.IdMessage).first()
         buttonText = buttonDate.ButtonText
