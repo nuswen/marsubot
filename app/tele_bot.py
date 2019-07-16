@@ -35,14 +35,18 @@ def hi_msg(msg):
 
 @bot.message_handler(commands=['menu'])
 def menu(msg):
-    textDate, buttons = menu_builder("1")
-    poster(bot, msg.chat.id, textDate.Text, addTag=textDate.TagAdd, 
+    textDate, buttons, text = menu_builder("1")
+    if not text:
+        text = textDate.Text
+    poster(bot, msg.chat.id, text, addTag=textDate.TagAdd, 
     remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img=textDate.Img)
 
 @bot.message_handler(commands=['smenu'])
 def smenu(msg):
-    textDate, buttons = menu_builder("9")
-    poster(bot, msg.chat.id, textDate.Text, addTag=textDate.TagAdd, 
+    textDate, buttons, text = menu_builder("9")
+    if not text:
+        text = textDate.Text
+    poster(bot, msg.chat.id, text, addTag=textDate.TagAdd, 
     remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img=textDate.Img)
 
 @bot.message_handler(content_types=['photo'])
@@ -66,7 +70,7 @@ def callback_inline(call):
         call.data = call.data[1:]
     
     textDate, buttons, text = menu_builder(call.data, call.message.chat.id)
-    
+
     if not text:
         text = textDate.Text
 
