@@ -38,7 +38,8 @@ def menu_builder(call, user = None):
     if menuDate.SpecAction == 'hi message newbie':
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
-        temp = str(textDate.Text)
+        text = str(textDate.Text)
+        text = text % curMsg
         if not user:
             waitUser = models.waitlist.query.filter_by(Id = user).first()
             if waitUser:
@@ -47,7 +48,6 @@ def menu_builder(call, user = None):
         newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie')
         db.session.add(newUser)
         db.session.commit()
-        textDate.Text = temp % curMsg
             
     else:
         nextPoint = (menuDate.Id * 10) + 1
@@ -77,4 +77,4 @@ def menu_builder(call, user = None):
         buttonLink = 9
         buttons.append([buttonText, buttonLink])
 
-    return textDate, buttons
+    return textDate, buttons, text

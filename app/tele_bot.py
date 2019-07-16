@@ -65,6 +65,10 @@ def callback_inline(call):
         wait_list_cls(call.message.chat.id)
         call.data = call.data[1:]
     
-    textDate, buttons = menu_builder(call.data, call.message.chat.id)
-    poster(bot, call.message.chat.id, (textDate.Text), addTag=textDate.TagAdd, 
+    textDate, buttons, text = menu_builder(call.data, call.message.chat.id)
+    
+    if not text:
+        text = textDate.Text
+
+    poster(bot, call.message.chat.id, text, addTag=textDate.TagAdd, 
     remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img)
