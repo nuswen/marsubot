@@ -61,6 +61,9 @@ def any_messages(msg):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
+    if call.data[:1] == '0':
+        wait_list_cls(call.message.chat.id)
+    
     textDate, buttons = menu_builder(call.data, call.message.chat.id)
     poster(bot, call.message.chat.id, (textDate.Text), addTag=textDate.TagAdd, 
     remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img)

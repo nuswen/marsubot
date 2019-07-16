@@ -21,6 +21,11 @@ def msg_start(first):
     text = msgDate.Text
     return text
 
+def wait_list_cls(user):
+    waitUser = models.waitlist.query.filter_by(Id = user).first()
+    db.session.delete(waitUser)
+    db.session.commit()
+
 def menu_builder(call, user = None):
     buttons = []
     try:
@@ -56,7 +61,7 @@ def menu_builder(call, user = None):
 
     strCall = str(call)
     call = str(call)
-    prevMenu = int(call[:-1])
+    prevMenu = '0' + call[:-1]
     buttons.append([backText, prevMenu]) #TODO добавить удаление из waitlist при нажатии
 
     if strCall != "1" and strCall[:1] == "1":
