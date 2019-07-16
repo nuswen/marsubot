@@ -63,6 +63,7 @@ def any_messages(msg):
 def callback_inline(call):
     if call.data[:1] == '0':
         wait_list_cls(call.message.chat.id)
+        call.data = call.data[1:]
     
     textDate, buttons = menu_builder(call.data, call.message.chat.id)
     poster(bot, call.message.chat.id, (textDate.Text), addTag=textDate.TagAdd, 
