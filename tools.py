@@ -61,11 +61,9 @@ def menu_builder(call, user = None):
               buttonText = buttonDate.ButtonText
               buttonLink = i
               buttons.append([buttonText, buttonLink])
-
+    strCall = str(call)
     if len(strCall) != 1:
-        strCall = str(call)
-        call = str(call)
-        prevMenu = '0' + call[:-1]
+        prevMenu = '0' + strCall[:-1]
         buttons.append([backText, prevMenu]) 
 
     if strCall != "1" and strCall[:1] == "1" and BckStartBtn:
