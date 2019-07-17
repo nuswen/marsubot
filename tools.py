@@ -86,9 +86,9 @@ def need_text (text, user):
     if waitUsr.WhatWait != 'text' and waitUsr.Id == user:
         return 'Вы должны прислать ' + waitUsr.WhatWait
     if waitUsr.From == 'hi message newbie' and waitUsr.Id == user:
-        message = models.messages.query.filter_by(Id = startMenuMessage).first()
+        message = models.messages.query.filter_by(Id = startMessage).first()
         message.Text = text
-        db.session.add(message)
+        db.session.add()
         db.session.commit()
         wait_list_cls(user)
         return 'Готово'
