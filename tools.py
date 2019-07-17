@@ -36,7 +36,7 @@ def menu_builder(call, user = None):
         pass
     menuDate = models.menu.query.filter_by(Id = call).first()
     textDate = models.messages.query.filter_by(Id = menuDate.IdMessage).first()
-        
+         
     if menuDate.SpecAction == 'hi message newbie':
         BckStartBtn = False
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
@@ -88,7 +88,7 @@ def need_text (text, user):
     if waitUsr.From == 'hi message newbie' and waitUsr.Id == user:
         message = models.messages.query.filter_by(Id = startMessage).first()
         message.Text = text
-        db.session.add()
+        db.session.add(message)
         db.session.commit()
         wait_list_cls(user)
         return 'Готово'
