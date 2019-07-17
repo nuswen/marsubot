@@ -35,3 +35,4 @@ class waitlist(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     WhatWait = db.Column(db.Text)
     From = db.Column(db.Text)
+    Call = db.Column(db.Text)
