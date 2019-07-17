@@ -92,4 +92,4 @@ def need_text (text, user):
         db.session.commit()
 
         wait_list_cls(user)
-    return 'Готово'
+        return 'Готово'
