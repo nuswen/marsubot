@@ -88,7 +88,7 @@ def need_text (text, user):
     if waitUsr.From == 'hi message newbie' and waitUsr.Id == user:
         message = models.messages.query.filter_by(Id = startMenuMessage).first()
         message.Text = text
-        db.session.add(message)
+        db.session.update(message)
         db.session.commit()
 
         wait_list_cls(user)
