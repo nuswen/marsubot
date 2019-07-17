@@ -80,3 +80,16 @@ def menu_builder(call, user = None):
         buttons.append([buttonText, buttonLink])
 
     return textDate, buttons, text
+
+def need_text (text, user):
+    waitUsr = models.waitlist.query.filter_by(Id = user).first()
+    if waitUsr.WhatWait != 'text' and waitUsr.Id == user:
+        return 'Вы должны прислать ' + waitUsr.WhatWait
+    if waitUsr.From == 'hi message newbie' and waitUsr.Id == user:
+        message = models.messages.query.filter_by(Id = startMenuMessage).first()
+        message.Text = text
+        db.session.add(message)
+        db.session.commit()
+
+        wait_list_cls(user)
+    return 'Готово'

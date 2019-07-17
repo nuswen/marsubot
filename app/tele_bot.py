@@ -60,7 +60,9 @@ def doc(msg):
 
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
-    poster(bot, msg.chat.id, 'message!')
+    # TODO добавить кнопку назад, и возможность менять тэги
+    text = need_text(msg.text, msg.chat.id)
+    poster(bot, msg.chat.id, text)
 
 
 @bot.callback_query_handler(func=lambda call: True)
