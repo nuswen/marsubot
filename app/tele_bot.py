@@ -39,16 +39,16 @@ def menu(msg):
     
     if textDate[:-1] != []:
         for i in textDate[:-1]:
-          poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
+          poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
-        poster(bot, call.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
+        poster(bot, msg.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
           remTag=textDate[-1:].TagRem, buttons=buttons, doc=textDate[-1:].Attach, 
           img = textDate[-1:].Img)
     else:
-        poster(bot, call.message.chat.id, textDate[0].Text, addTag=textDate[0].TagAdd, 
+        poster(bot, msg.message.chat.id, textDate[0].Text, addTag=textDate[0].TagAdd, 
           remTag=textDate[0].TagRem, buttons=buttons, doc=textDate[0].Attach, \
-              img = textDate[0].Img, ed = True, message_id=call.message.message_id)
+              img = textDate[0].Img, ed = True, message_id=msg.message.message_id)
 
 @bot.message_handler(commands=['smenu'])
 def smenu(msg):
@@ -59,7 +59,7 @@ def smenu(msg):
           poster(bot, msg.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
-        poster(bot, call.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
+        poster(bot, msg.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
           remTag=textDate[-1:].TagRem, buttons=buttons, doc=textDate[-1:].Attach, 
           img = textDate[-1:].Img)
     else:
