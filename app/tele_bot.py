@@ -67,16 +67,15 @@ def any_messages(msg):
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
-    # if call.data[0] == '0':
-    #     wait_list_cls(call.message.chat.id)
-    #     call.data = call.data[1:]
+    if call.data[0] == '0':
+        wait_list_cls(call.message.chat.id)
+        call.data = call.data[1:]
     
-    # textDate, buttons, text = menu_builder(call.data, call.message.chat.id)
+    textDate, buttons, text = menu_builder(call.data, call.message.chat.id)
 
-    # if not text:
-    #     text = textDate.Text
+    if not text:
+        text = textDate.Text
 
-    # poster(bot, call.message.chat.id, text, addTag=textDate.TagAdd, 
-    # remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img,
-    # ed = True, message_id=)
-    poster(bot, call.message.chat.id, call)
+    poster(bot, call.message.chat.id, text, addTag=textDate.TagAdd, 
+    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img,
+    ed = True, message_id=call.messge.message_id)
