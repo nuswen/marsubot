@@ -35,19 +35,37 @@ def hi_msg(msg):
 
 @bot.message_handler(commands=['menu'])
 def menu(msg):
-    textDate, buttons, text = menu_builder("1")
-    if not text:
-        text = textDate.Text
-    poster(bot, msg.chat.id, text, addTag=textDate.TagAdd, 
-    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img=textDate.Img)
+    textDate, buttons = menu_builder('1')
+    
+    if textDate[:-1] != []:
+        for i in textDate[:-1]:
+          poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
+          remTag=i.TagRem, doc=i.Attach, img = i.Img)
+
+        poster(bot, call.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
+          remTag=textDate[-1:].TagRem, buttons=buttons, doc=textDate[-1:].Attach, 
+          img = textDate[-1:].Img)
+    else:
+        poster(bot, call.message.chat.id, textDate[0].Text, addTag=textDate[0].TagAdd, 
+          remTag=textDate[0].TagRem, buttons=buttons, doc=textDate[0].Attach, \
+              img = textDate[0].Img, ed = True, message_id=call.message.message_id)
 
 @bot.message_handler(commands=['smenu'])
 def smenu(msg):
-    textDate, buttons, text = menu_builder("9")
-    if not text:
-        text = textDate.Text
-    poster(bot, msg.chat.id, text, addTag=textDate.TagAdd, 
-    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img=textDate.Img)
+    textDate, buttons = menu_builder('9')
+    
+    if textDate[:-1] != []:
+        for i in textDate[:-1]:
+          poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
+          remTag=i.TagRem, doc=i.Attach, img = i.Img)
+
+        poster(bot, call.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
+          remTag=textDate[-1:].TagRem, buttons=buttons, doc=textDate[-1:].Attach, 
+          img = textDate[-1:].Img)
+    else:
+        poster(bot, call.message.chat.id, textDate[0].Text, addTag=textDate[0].TagAdd, 
+          remTag=textDate[0].TagRem, buttons=buttons, doc=textDate[0].Attach, \
+              img = textDate[0].Img, ed = True, message_id=call.message.message_id)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
@@ -71,11 +89,17 @@ def callback_inline(call):
         wait_list_cls(call.message.chat.id)
         call.data = call.data[1:]
     
-    textDate, buttons, text = menu_builder(call.data, call.message.chat.id)
+    textDate, buttons = menu_builder(call.data, call.message.chat.id)
+    
+    if textDate[:-1] != []:
+        for i in textDate[:-1]:
+          poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
+          remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
-    if not text:
-        text = textDate.Text
-
-    poster(bot, call.message.chat.id, text, addTag=textDate.TagAdd, 
-    remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img,
-    ed = True, message_id=call.message.message_id)
+        poster(bot, call.message.chat.id, textDate[-1:].Text, addTag=textDate[-1:].TagAdd, 
+          remTag=textDate[-1:].TagRem, buttons=buttons, doc=textDate[-1:].Attach, 
+          img = textDate[-1:].Img)
+    else:
+        poster(bot, call.message.chat.id, textDate[0].Text, addTag=textDate[0].TagAdd, 
+          remTag=textDate[0].TagRem, buttons=buttons, doc=textDate[0].Attach, \
+              img = textDate[0].Img, ed = True, message_id=call.message.message_id)
