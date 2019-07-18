@@ -78,4 +78,4 @@ def callback_inline(call):
 
     poster(bot, call.message.chat.id, text, addTag=textDate.TagAdd, 
     remTag=textDate.TagRem, buttons=buttons, doc=textDate.Attach, img = textDate.Img,
-    ed = True, message_id=call.messge.message_id)
+    ed = True, message_id=call.message.message_id)
