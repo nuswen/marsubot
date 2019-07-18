@@ -36,12 +36,9 @@ def menu_builder(call, user = None):
     except:
         pass
     menuDate = models.menu.query.filter_by(Id = call).first()
-    textDate = [models.messages.query.filter_by(Id = menuDate.IdMessage).first()]
          
     if menuDate.SpecAction == 'hi message newbie':
-        textDateAdd, buttons = mes_editor(startMessage)
-        for i in textDateAdd:
-            textDate.append(i)
+        textDate, buttons = mes_editor(startMessage)
         # BckStartBtn = False
         # curMsg = models.messages.query.filter_by(Id = startMessage).first()
         # curMsg = curMsg.Text
@@ -59,6 +56,7 @@ def menu_builder(call, user = None):
         # db.session.commit()
             
     else:
+        textDate = [models.messages.query.filter_by(Id = menuDate.IdMessage).first()]
         nextPoint = (menuDate.Id * 10) + 1
         for i in range(nextPoint,nextPoint+9):
           buttonMenuDate = models.menu.query.filter_by(Id = i).first()
