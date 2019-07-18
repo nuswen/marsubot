@@ -23,8 +23,9 @@ def msg_start(first):
 
 def wait_list_cls(user):
     waitUser = models.waitlist.query.filter_by(Id = user).first()
-    db.session.delete(waitUser)
-    db.session.commit()
+    if not waitUser:
+        db.session.delete(waitUser)
+        db.session.commit()
 
 def menu_builder(call, user = None):
     BckStartBtn = True
