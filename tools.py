@@ -31,7 +31,6 @@ def wait_list_cls(user):
 def menu_builder(call, user = None):
     BckStartBtn = True
     buttons = []
-    text = None
     try:
         call = int(call)
     except:

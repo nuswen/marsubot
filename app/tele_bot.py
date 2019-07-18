@@ -93,7 +93,7 @@ def callback_inline(call):
     
     textDate, buttons = menu_builder(call.data, call.message.chat.id)
     
-    if textDate[:-1] != []:
+    if len(textDate) > 1:
         for i in textDate[:-1]:
             poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
             remTag=i.TagRem, doc=i.Attach, img = i.Img)
