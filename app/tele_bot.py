@@ -42,14 +42,14 @@ def menu(msg):
           poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
-        i = textDate[-1:]
+        i = textDate[-1]
         poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, buttons=buttons, doc=i.Attach, img = i.Img)
     else:
         i = textDate[0]
         poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, buttons=buttons, doc=i.Attach,
-              img = i.Img, ed = True, message_id=msg.message.message_id)
+              img = i.Img)
 
 @bot.message_handler(commands=['smenu'])
 def smenu(msg):
@@ -98,7 +98,7 @@ def callback_inline(call):
             poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
             remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
-        i = textDate[-1:]
+        i = textDate[-1]
         poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, buttons=buttons, doc=i.Attach, 
           img = i.Img)
