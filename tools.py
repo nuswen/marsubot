@@ -39,7 +39,8 @@ def menu_builder(call, user = None):
     textDate = [models.messages.query.filter_by(Id = menuDate.IdMessage).first()]
          
     if menuDate.SpecAction == 'hi message newbie':
-        textDate, buttons = mes_editor(startMessage)
+        textDateAdd, buttons = mes_editor(startMessage)
+        textDate.append(textDateAdd)
         # BckStartBtn = False
         # curMsg = models.messages.query.filter_by(Id = startMessage).first()
         # curMsg = curMsg.Text

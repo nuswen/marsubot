@@ -95,7 +95,7 @@ def callback_inline(call):
     
     if len(textDate) > 1:
         for i in textDate[:-1]:
-            poster(bot, call.message.chat.id, i)
+            poster(bot, call.message.chat.id, i[1])
             poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
             remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
