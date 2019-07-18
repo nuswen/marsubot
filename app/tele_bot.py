@@ -103,8 +103,7 @@ def callback_inline(call):
 
         i = textDate[-1]
         poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
-          remTag=i.TagRem, buttons=buttons, doc=i.Attach, 
-          img = i.Img)
+        remTag=i.TagRem, buttons=buttons, doc=i.Attach, img = i.Img)
     else:
         i=textDate[0]
         poster(bot, call.message.chat.id, i.Text, addTag=i.TagAdd, 
