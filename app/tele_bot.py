@@ -57,15 +57,15 @@ def smenu(msg):
     
     if textDate[:-1] != []:
         for i in textDate[:-1]:
-            poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
+            poster(bot, msg.chat.id, i.Text, addTag=i.TagAdd, 
             remTag=i.TagRem, doc=i.Attach, img = i.Img)
 
-        i = textDate[-1:]
-        poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
+        i = textDate[-1]
+        poster(bot, msg.chat.id, i.Text, addTag=i.TagAdd, 
         remTag=i.TagRem, buttons=buttons, doc=i.Attach, img = i.Img)
     else:
         i = textDate[0]
-        poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
+        poster(bot, msg.chat.id, i.Text, addTag=i.TagAdd, 
         remTag=i.TagRem, buttons=buttons, doc=i.Attach,
         img = i.Img, ed = True, message_id=msg.message.message_id)
 
