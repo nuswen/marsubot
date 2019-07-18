@@ -23,7 +23,7 @@ def msg_start(first):
 
 def wait_list_cls(user):
     waitUser = models.waitlist.query.filter_by(Id = user).first()
-    print waitUser
+    print (waitUser)
     if not waitUser:
         db.session.delete(waitUser)
         db.session.commit()
