@@ -67,7 +67,7 @@ def smenu(msg):
         i = textDate[0]
         poster(bot, msg.chat.id, i.Text, addTag=i.TagAdd, 
         remTag=i.TagRem, buttons=buttons, doc=i.Attach,
-        img = i.Img, ed = True, message_id=msg.message.message_id)
+        img = i.Img)
 
 @bot.message_handler(content_types=['photo'])
 def photo(msg):
