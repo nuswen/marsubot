@@ -99,6 +99,7 @@ def need_text (text, user):
 
 def mes_editor (idMsg):
     curMsg = models.messages.query.filter_by(Id = idMsg).first()
+    print (curMsgText)
     temp = models.messages.query.filter_by(Id = curMsgText).first()
     headMsg = models.messages(Text=temp.Text)
     curPodtMsg = models.messages(Text=curMsg.Text, Attach=curMsg.Attach, Img=curMsg.Img)
