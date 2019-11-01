@@ -42,7 +42,7 @@ def menu_builder(call, user = None):
         BckStartBtn = False
         curMsg = models.messages.query.filter_by(Id = startMessage).first()
         curMsg = curMsg.Text
-        text = str(textDate.Text)
+        text = str(textDate[0])
         text = text % curMsg
         if not user:
             waitUser = models.waitlist.query.filter_by(Id = user).first()
