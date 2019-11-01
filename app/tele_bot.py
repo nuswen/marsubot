@@ -48,7 +48,7 @@ def menu(msg):
     else:
         i = textDate[0]
         print (str(msg))
-        poster(bot, msg.message.chat.id, i.Text, addTag=i.TagAdd, 
+        poster(bot, msg.chat.id, i.Text, addTag=i.TagAdd, 
           remTag=i.TagRem, buttons=buttons, doc=i.Attach,
               img = i.Img)
 
