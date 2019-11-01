@@ -39,21 +39,21 @@ def menu_builder(call, user = None):
          
     if menuDate.SpecAction == 'hi message newbie':
         textDate, buttons = mes_editor(startMessage)
-        # BckStartBtn = False
-        # curMsg = models.messages.query.filter_by(Id = startMessage).first()
-        # curMsg = curMsg.Text
-        # text = str(textDate.Text)
-        # text = text % curMsg
-        # if not user:
-        #     waitUser = models.waitlist.query.filter_by(Id = user).first()
-        #     if waitUser:
-        #         db.session.delete(waitUser)
-        # callSave = str(call)
-        # callSave = callSave[:-1]
-        # newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie text', 
-        # Call = callSave)
-        # db.session.add(newUser)
-        # db.session.commit()
+        BckStartBtn = False
+        curMsg = models.messages.query.filter_by(Id = startMessage).first()
+        curMsg = curMsg.Text
+        text = str(textDate.Text)
+        text = text % curMsg
+        if not user:
+            waitUser = models.waitlist.query.filter_by(Id = user).first()
+            if waitUser:
+                db.session.delete(waitUser)
+        callSave = str(call)
+        callSave = callSave[:-1]
+        newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie text', 
+        Call = callSave)
+        db.session.add(newUser)
+        db.session.commit()
             
     else:
         textDate = [models.messages.query.filter_by(Id = menuDate.IdMessage).first()]
@@ -99,7 +99,6 @@ def need_text (text, user):
 
 def mes_editor (idMsg):
     curMsg = models.messages.query.filter_by(Id = idMsg).first()
-    print (curMsgText)
     temp = models.messages.query.filter_by(Id = curMsgText).first()
     headMsg = models.messages(Text=temp.Text)
     curPodtMsg = models.messages(Text=curMsg.Text, Attach=curMsg.Attach, Img=curMsg.Img)
