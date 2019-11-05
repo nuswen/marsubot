@@ -44,6 +44,7 @@ def menu_builder(call, user = None):
             waitUser = models.waitlist.query.filter_by(Id = user).first()
             if waitUser:
                 db.session.delete(waitUser)
+                
         callSave = str(call)
         callSave = callSave[:-1]
         newUser = models.waitlist(Id = user, WhatWait = 'text', From = 'hi message newbie text', 
