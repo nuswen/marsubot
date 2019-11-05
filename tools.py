@@ -40,10 +40,6 @@ def menu_builder(call, user = None):
     if menuDate.SpecAction == 'hi message newbie':
         textDate, buttons = mes_editor(startMessage)
         BckStartBtn = False
-        curMsg = models.messages.query.filter_by(Id = startMessage).first()
-        curMsg = curMsg.Text
-        text = str(textDate[0])
-        text = text % curMsg
         if not user:
             waitUser = models.waitlist.query.filter_by(Id = user).first()
             if waitUser:
