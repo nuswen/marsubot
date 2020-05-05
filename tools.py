@@ -11,7 +11,7 @@ def msg_dwn_usr(productId):
     msgDate = models.messages.query.filter_by(Id = msgId).first()
     name = productData.ProductName
     text = msgDate.Text % name
-    return text, msgDate
+    return text, msgDate, productData
 
 def msg_start(first):
     if first == 'start':

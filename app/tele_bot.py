@@ -19,8 +19,7 @@ def hi_msg(msg):
     if command == 'dwn': # команда на скачивание продукта
         try:
             productId = int(msg.text[10:])
-            msgGo, msgDate = msg_dwn_usr(productId)
-            productData = models.product.query.filter_by(Id = productId).first()
+            msgGo, msgDate, productData = msg_dwn_usr(productId)
             productFileId = productData.FileIdTelega
             poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
             poster(bot, msg.chat.id, msgGo, addTag=msgDate.TagAdd, remTag=msgDate.TagRem, 
