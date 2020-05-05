@@ -21,7 +21,7 @@ def hi_msg(msg):
             productFileId = productData.FileIdTelega
             poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
             print(msgDate.Img)
-            poster(bot, msg.chat.id, msgGo, doc=productFileId, img=msgDate.Img)
+            poster(bot, msg.chat.id, msgGo, doc=productFileId, img=productData.Img)
         except:
             command = '000'
     else:
