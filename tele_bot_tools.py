@@ -4,6 +4,7 @@ from app import db
 import json
 import re
 
+
 def poster(bot, chatId, text=None, buttons=None, ed=False, message_id=None, doc=None, img=None,inline=False,lenRow=None):
     if buttons:
         if ed and not img and not doc:
@@ -91,3 +92,16 @@ def clasicKeyboarder(keys):
     for i in temp:
         keyboard.add(i)
     return keyboard
+
+def new_tele_user(usrId):
+    '''
+    Пытается добавить нового юзера в базу - возвращает start если вышло, если юзверь 
+    уже есть - continue
+    '''
+    exUser = models.teleusers.query.filter_by(Id = usrId).first()
+    if exUser:
+        return 'continue'
+    newUser = models.teleusers(Id = usrId)
+    db.session.add(newUser)
+    db.session.commit()
+    return 'start'
