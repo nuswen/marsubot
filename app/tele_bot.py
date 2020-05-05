@@ -14,13 +14,13 @@ def hi_msg(msg):
         command = msg.text[7:10] # ищем комманду в стартовом сообщении
     except:
         command = '000' # если сообщение не кодировано, скидываем в вариант по умолчанию
-    print(command)
     if command == 'dwn': # команда на скачивание продукта
         try:
             productId = int(msg.text[10:])
             msgGo, msgDate, productData = msg_dwn_usr(productId)
             productFileId = productData.FileIdTelega
             poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
+            print(msgDate.Img)
             poster(bot, msg.chat.id, msgGo, doc=productFileId, img=msgDate.Img)
         except:
             command = '000'
