@@ -121,7 +121,7 @@ def openTeleMailing(userId):
     if 'mailingOpen' in user.Tags:
         return
     newMailing = models.mailingList(Messages = {},
-                                    userCreator = userId,
+                                    userCreator = int(userId),
                                     isClosed = False)
     user.Tags.append('mailingOpen')
     models.teleusers.query.filter_by(Id = userId).update({'Tags':user.Tags})
