@@ -27,7 +27,7 @@ class product(db.Model):
     FileIdTelega = db.Column(db.Text)
     Img = db.Column(db.Text)
 
-class mailingList(db.Model):
+class mailinglist(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Messages = db.Column(JSONB)
     UnixTimeToGo = db.Column(db.Integer)
