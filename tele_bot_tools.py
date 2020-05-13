@@ -111,6 +111,7 @@ def openTeleMailing(userId):
     '''
     Открывает возможность составления рассылки для пользователя
     '''
+    print('openTeleMailing')
     user = models.teleusers.query.filter_by(Id = userId).first()
     print(user)
     user.Tags.append('mailingOpen')
@@ -125,5 +126,6 @@ def isAdmin(userId):
     '''
     Принимает Id телеграмм пользователя - возвращает boolean является ли он админом
     '''
+    print('isAdmin')
     user = models.teleusers.query.filter_by(Id = userId).first()
     return user.isAdmin
