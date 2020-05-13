@@ -111,14 +111,10 @@ def openTeleMailing(userId):
     '''
     Открывает возможность составления рассылки для пользователя
     '''
-    print('openTeleMailing')
     user = models.teleusers.query.filter_by(Id = userId).first()
-    print('user')
     user.Tags.append('mailingOpen')
-    print(user.Tags)
     temp = set(user.Tags)
-    user.Tags = list(temp)
-    print(user.Tags)
+    models.teleusers.query.filter_by(Id = userId).update({'Tags':list(temp)})
     db.session.commit()
 
 
