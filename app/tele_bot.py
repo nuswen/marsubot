@@ -38,7 +38,7 @@ def mailing(msg):
 
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
-    pass
+    teleIn(msg)
 
 
 @bot.callback_query_handler(func=lambda call: True)

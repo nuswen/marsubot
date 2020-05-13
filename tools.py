@@ -23,4 +23,3 @@ def msg_start(first):
         msgDate = models.messages.query.filter_by(Id = msgContinue).first()
     text = msgDate.Text
     return text
-

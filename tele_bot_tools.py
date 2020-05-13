@@ -3,6 +3,9 @@ from app import models
 from app import db
 import json
 import re
+from app import bot
+from set import *
+import time
 
 
 def poster(bot, chatId, text=None, buttons=None, ed=False, message_id=None, doc=None, img=None,inline=False,lenRow=None):
@@ -101,27 +104,52 @@ def new_tele_user(usrId):
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
         return 'continue'
-    newUser = models.teleusers(Id = usrId)
+    newUser = models.teleusers(Id = usrId,
+                                Tags = [],
+                                Tunels = {},
+                                LastAct = int(time.time()),
+                                isAdmin = False)
     db.session.add(newUser)
     db.session.commit()
     return 'start'
-
 
 def openTeleMailing(userId):
     '''
     Открывает возможность составления рассылки для пользователя
     '''
     user = models.teleusers.query.filter_by(Id = userId).first()
+    if 'mailingOpen' in user.Tags:
+        return
+    newMailing = models.mailingList(Messages = {},
+                                    userCreator = userId,
+                                    isClosed = False)
     user.Tags.append('mailingOpen')
-    temp = set(user.Tags)
-    models.teleusers.query.filter_by(Id = userId).update({'Tags':list(temp)})
+    models.teleusers.query.filter_by(Id = userId).update({'Tags':user.Tags})
+    db.session.add(newMailing)
     db.session.commit()
-
+    msgDate = models.messages.query.filter_by(Id = openTeleMailingMessage).first()
+    poster(bot, userId, msgDate.Text)
 
 def isAdmin(userId):
     '''
     Принимает Id телеграмм пользователя - возвращает boolean является ли он админом
     '''
-    print('isAdmin')
     user = models.teleusers.query.filter_by(Id = userId).first()
     return user.isAdmin
+
+def teleIn(msg):
+    '''
+    Разбирает куда отправить сообщение от пользователя
+    '''
+    # Смотрим что за пользователь
+    user = models.teleusers.query.filter_by(Id = msg.chat.id).first()
+    # Проходимся по тегам
+    for tag in user.Tags:
+        if tag == 'mailingOpen': #  Если у юзера открыта сессия составления рассылки
+            toMailingMsgs(msg)
+
+def toMailingMsgs(msg):
+    '''
+    Добавляет в рассылку сообщение
+    '''
+    print(msg)
