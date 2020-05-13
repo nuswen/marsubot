@@ -152,9 +152,11 @@ def toMailingMsgs(msg):
     '''
     Добавляет в рассылку сообщение
     '''
+    mailing = models.mailinglist.query.filter_by(userCreator = msg.chat.id and isClosed = False).first()
+    print(mailing.isClosed)
     print(msg)
     if msg.content_type == 'text':
-        print('text')
+        newMsg = {}
     elif msg.content_type == 'photo':
         print('photo')
     elif msg.content_type == 'document':
