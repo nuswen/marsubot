@@ -105,3 +105,22 @@ def new_tele_user(usrId):
     db.session.add(newUser)
     db.session.commit()
     return 'start'
+
+
+def openTeleMailing(userId):
+    '''
+    Открывает возможность составления рассылки для пользователя
+    '''
+    user = models.teleusers.query.filter_by(Id = userId).first()
+    user.Tags.append('mailingOpen')
+    temp = set(user.Tags)
+    user.Tags = list(temp)
+    db.session.commit()
+
+
+def isAdmin(userId):
+    '''
+    Принимает Id телеграмм пользователя - возвращает boolean является ли он админом
+    '''
+    user = models.teleusers.query.filter_by(Id = userId).first()
+    return user.isAdmin

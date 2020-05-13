@@ -8,6 +8,7 @@ class teleusers(db.Model):
     Tunels = db.Column(ARRAY(db.Integer))
     TunelsLevel = db.Column(ARRAY(db.Integer))
     LastAct = db.Column(db.Integer)
+    isAdmin= db.Column(db.Boolean)
 
 class messages(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
