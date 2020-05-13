@@ -40,6 +40,13 @@ def mailing(msg):
 def any_messages(msg):
     teleIn(msg)
 
+@bot.message_handler(content_types=['photo'])
+def any_photo(msg):
+    teleIn(msg)
+
+@bot.message_handler(content_types=['document'])
+def any_document(msg):
+    teleIn(msg)
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_inline(call):
