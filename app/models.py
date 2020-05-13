@@ -18,11 +18,6 @@ class messages(db.Model):
     TagRem = db.Column(ARRAY(db.Text))
     Img = db.Column(db.Text)
 
-class menu(db.Model):
-    Id = db.Column(db.Integer, primary_key=True)
-    IdMessage = db.Column(db.Integer)
-    SpecAction = db.Column(db.Text)
-
 class product(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     MessageId = db.Column(db.Integer)
@@ -30,9 +25,3 @@ class product(db.Model):
     DownloadLink = db.Column(db.Text)
     FileIdTelega = db.Column(db.Text)
     Img = db.Column(db.Text)
-
-class waitlist(db.Model):
-    Id = db.Column(db.Integer, primary_key=True)
-    WhatWait = db.Column(db.Text)
-    From = db.Column(db.Text)
-    Call = db.Column(db.Text)
