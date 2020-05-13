@@ -155,3 +155,8 @@ def toMailingMsgs(msg):
     print(msg)
     if msg.content_type == 'text':
         print('text')
+    elif msg.content_type == 'photo':
+        print('photo')
+    elif msg.content_type == 'document':
+        print('document')
+
