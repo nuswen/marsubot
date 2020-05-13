@@ -6,7 +6,7 @@ from sqlalchemy.dialects.postgresql import JSONB
 class teleusers(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Tags = db.Column(ARRAY(db.Text))
-    Tunels = db.Column(JSONB())
+    Tunels = db.Column(JSONB)
     LastAct = db.Column(db.Integer)
     isAdmin= db.Column(db.Boolean)
 
@@ -29,7 +29,7 @@ class product(db.Model):
 
 class mailingList(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
-    Messages = db.Column(JSONB())
+    Messages = db.Column(JSONB)
     UnixTimeToGo = db.Column(db.Integer)
     userCreator = db.Column(db.Integer)
     isClosed = db.Column(db.Boolean)
