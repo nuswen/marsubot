@@ -6,7 +6,7 @@ import re
 from app import bot
 from set import *
 import time
-import json
+
 
 def poster(bot, chatId, text=None, buttons=None, ed=False, message_id=None, doc=None, img=None,inline=False,lenRow=None):
     if buttons:
@@ -120,7 +120,7 @@ def openTeleMailing(userId):
     user = models.teleusers.query.filter_by(Id = userId).first()
     if 'mailingOpen' in user.Tags:
         return
-    newMailing = models.mailingList(Messages = json.dumps({}),
+    newMailing = models.mailingList(Id = 1, Messages = {},
                                     userCreator = userId,
                                     isClosed = False)
     user.Tags.append('mailingOpen')
