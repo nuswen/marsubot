@@ -113,7 +113,7 @@ def openTeleMailing(userId):
     '''
     print('openTeleMailing')
     user = models.teleusers.query.filter_by(Id = userId).first()
-    print(user)
+    print('user')
     user.Tags.append('mailingOpen')
     print(user.Tags)
     temp = set(user.Tags)
