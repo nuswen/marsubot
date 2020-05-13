@@ -33,7 +33,7 @@ def hi_msg(msg):
 @bot.message_handler(commands=['mailing'])
 def mailing(msg):
     if isAdmin(msg.chat.id):
-        openTeleMailing(msg)
+        openTeleMailing(msg.chat.id)
 
 
 @bot.message_handler(content_types=['text'])
