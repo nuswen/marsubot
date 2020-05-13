@@ -114,7 +114,7 @@ def openTeleMailing(userId):
     user = models.teleusers.query.filter_by(Id = userId).first()
     user.Tags.append('mailingOpen')
     temp = set(user.Tags)
-    user.Tags = list(temp)
+    models.teleusers.query.filter_by(Id = userId).update({'Tags':list(temp)})
     db.session.commit()
 
 
