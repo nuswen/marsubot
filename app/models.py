@@ -2,7 +2,6 @@ from app import db
 from sqlalchemy.dialects.postgresql import ARRAY
 from sqlalchemy.dialects.postgresql import JSONB
 
-
 class teleusers(db.Model):
     Id = db.Column(db.Integer, primary_key=True)
     Tags = db.Column(ARRAY(db.Text))

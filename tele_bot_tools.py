@@ -153,3 +153,5 @@ def toMailingMsgs(msg):
     Добавляет в рассылку сообщение
     '''
     print(msg)
+    if msg.content_type == 'text':
+        print('text')
