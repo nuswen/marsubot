@@ -41,7 +41,6 @@ def endMailing(msg):
         print(msg)
         closeMailing(msg.chat.id, msg.text[14:])
 
-
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
     teleIn(msg)

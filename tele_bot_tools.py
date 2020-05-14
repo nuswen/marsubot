@@ -7,7 +7,6 @@ from app import bot
 from set import *
 from datetime import datetime,date,time
 
-
 def poster(bot, chatId, text=None, buttons=None, ed=False, message_id=None, doc=None, img=None,inline=False,lenRow=None):
     if buttons:
         if ed and not img and not doc:
@@ -101,6 +100,7 @@ def new_tele_user(usrId):
     Пытается добавить нового юзера в базу - возвращает start если вышло, если юзверь 
     уже есть - continue
     '''
+    #TODO Добавлять часовой пояс
     exUser = models.teleusers.query.filter_by(Id = usrId).first()
     if exUser:
         return 'continue'
@@ -181,6 +181,7 @@ def closeMailing(userId,closeDataTime):
     '''
     Закрывает сессию добавления постов к рассылке, указывает время отправки рассылки
     '''
+    #TODO Учитывать часовой пояс
     # Делаем из входящего формата строки "час минуты день месяц" timestamp
     closeDataTime = closeDataTime.split()
     today = date.today()
