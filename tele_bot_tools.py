@@ -172,7 +172,7 @@ def toMailingMsgs(msg):
         newMsg = {numMsg:{'text':msg.caption,'img':None,'attach':msg.document.file_id}}
 
     mailing.Messages.update(newMsg)
-    models.mailing.query.filter_by(userCreator = msg.chat.id, isClosed = False).update({'Messages':mailing.Messages})
+    models.mailinglist.query.filter_by(userCreator = msg.chat.id, isClosed = False).update({'Messages':mailing.Messages})
     db.session.commit()
 
     print(newMsg)
