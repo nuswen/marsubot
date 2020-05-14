@@ -35,6 +35,12 @@ def mailing(msg):
     if isAdmin(msg.chat.id):
         openTeleMailing(msg.chat.id)
 
+@bot.message_handler(commands=['closeMailing'])
+def endMailing(msg):
+    if isAdmin(msg.chat.id):
+        print(msg)
+        closeMailing(msg.chat.id, msg.text)
+
 
 @bot.message_handler(content_types=['text'])
 def any_messages(msg):
