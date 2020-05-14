@@ -193,5 +193,6 @@ def closeMailing(userId,closeDataTime):
         dt = datetime.combine(d, t)
         models.mailinglist.query.filter_by(userCreator = userId, isClosed = False).update({'UnixTimeToGo':int(dt.timestamp()),
                                                                                             'isClosed':True})
+        db.session.commit()
     except Exception as e:
         print(e)
