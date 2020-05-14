@@ -5,7 +5,7 @@ import json
 import re
 from app import bot
 from set import *
-import time
+from datetime import datetime,date,time
 
 
 def poster(bot, chatId, text=None, buttons=None, ed=False, message_id=None, doc=None, img=None,inline=False,lenRow=None):
@@ -107,7 +107,7 @@ def new_tele_user(usrId):
     newUser = models.teleusers(Id = usrId,
                                 Tags = [],
                                 Tunels = {},
-                                LastAct = int(time.time()),
+                                LastAct = int(datetime.now().timestamp()),
                                 isAdmin = False)
     db.session.add(newUser)
     db.session.commit()
@@ -181,18 +181,17 @@ def closeMailing(userId,closeDataTime):
     '''
     Закрывает сессию добавления постов к рассылке, указывает время отправки рассылки
     '''
-    mailing = models.mailinglist.query.filter_by(userCreator = userId, isClosed = False).first()
     # Делаем из входящего формата строки "час минуты день месяц" timestamp
     closeDataTime = closeDataTime.split()
     today = date.today()
     curYear = today.timetuple()[0]
     try:
-        t = time(int(a[0]),int(a[1]))
-        d = date(curYear,int(a[3]),int(a[2]))
+        t = time(int(closeDataTime[0]),int(closeDataTime[1]))
+        d = date(curYear,int(closeDataTime[3]),int(closeDataTime[2]))
         if today > d:
-            d = date(curYear+1,int(a[3]),int(a[2]))
+            d = date(curYear+1,int(closeDataTime[3]),int(closeDataTime[2]))
         dt = datetime.combine(d, t)
         models.mailinglist.query.filter_by(userCreator = userId, isClosed = False).update({'UnixTimeToGo':int(dt.timestamp()),
                                                                                             'isClosed':True})
-    except e as Exception:
+    except Exception as e:
         print(e)
