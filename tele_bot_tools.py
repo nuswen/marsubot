@@ -159,7 +159,7 @@ def toMailingMsgs(msg):
     else:
         numMsg = []
         for i in numMsg:
-            numMsg.append(i)
+            numMsg.append(int(i))
         numMsg.sort()
         numMsg = numMsg[-1] + 1
     print(msg)
