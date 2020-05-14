@@ -177,5 +177,5 @@ def toMailingMsgs(msg):
 
     print(newMsg)
 
-def clodeMailing(userId,closeDataTime):
+def closeMailing(userId,closeDataTime):
     pass
