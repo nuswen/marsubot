@@ -213,7 +213,10 @@ def checkMailing():
     '''
     mailings = models.mailinglist.query.filter_by(Done = False, isClosed = True).all()
     tsn = int(datetime.now().timestamp())
+    print(tsn)
+    print
     for mailing in mailings:
+        print(mailing.UnixTimeToGo)
         if tsn<=mailing.UnixTimeToGo:
             sendMailing(mailing)
 
