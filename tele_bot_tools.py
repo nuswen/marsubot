@@ -213,10 +213,7 @@ def checkMailing():
     '''
     mailings = models.mailinglist.query.filter_by(Done = False, isClosed = True).all()
     tsn = int(datetime.now().timestamp())
-    print(tsn)
-    print
     for mailing in mailings:
-        print(mailing.UnixTimeToGo)
         if tsn<=mailing.UnixTimeToGo:
             sendMailing(mailing)
 
@@ -229,8 +226,16 @@ def sendMailing(mailing):
     #TODO Разбить на потоки
 
     users = models.teleusers.query.all()
+    order = []
+    for msgNum in mailing.Messages:
+        order.append(int(msgNum))
+    order.sort()
+
     for user in users:
-        poster(bot,user.Id,mailing.Messages['text'],img=mailing.Messages['img'],doc=mailing.Messages['attach'])
+        for i in order:
+            poster(bot,user.Id,mailing.Messages[str(i)]['text'],
+                    img=mailing.Messages[str(i)]['img'],
+                    doc=mailing.Messages[str(i)]['attach'])
     models.mailinglist.query.filter_by(Id = mailing.Id).update({'Done':True})
     db.session.commit()
 
