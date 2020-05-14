@@ -202,6 +202,7 @@ def closeMailing(userId,closeDataTime):
         except Exception as e:
             pass
         db.session.commit()
+        print(dt)
     except Exception as e:
         print(e)
 
@@ -225,4 +226,7 @@ def sendMailing(mailing):
 
     users = models.teleusers.query.all()
     for user in users:
-        poster(bot,user.Id,Messages['text'],img=Messages['img'],doc= Messages['attach'])
+        poster(bot,user.Id,mailing.Messages['text'],img=mailing.Messages['img'],doc=mailing.Messages['attach'])
+    models.mailinglist.query.filter_by(Id = mailing.Id).update({'Done':True})
+    db.session.commit()
+
