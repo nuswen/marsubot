@@ -211,6 +211,7 @@ def checkMailing():
     '''
     Чекает, не пора бы отправлять рассылку
     '''
+    print('work')
     mailings = models.mailinglist.query.filter_by(Done = False, isClosed = True).all()
     tsn = int(datetime.now().timestamp())
     for mailing in mailings:
