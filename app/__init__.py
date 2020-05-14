@@ -2,6 +2,7 @@ from os import environ
 from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 import telebot
+import threading
 
 bot = telebot.TeleBot(environ['token'])
 
@@ -10,6 +11,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
 from app import tele_bot, models
+
+@app.before_first_request
+def activate_job():
+    def checkTask_worker():
+        from tools import checkTask
+        while True:
+            checkTask()
+
+    thread = threading.Thread(target=checkTask_worker)
+    thread.start()
 
 @app.route("/"+environ['token'], methods=['POST'])
 def getMessage():

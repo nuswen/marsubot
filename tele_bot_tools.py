@@ -122,7 +122,8 @@ def openTeleMailing(userId):
         return
     newMailing = models.mailinglist(Messages = {},
                                     userCreator = userId,
-                                    isClosed = False)
+                                    isClosed = False,
+                                    Done = False)
     user.Tags.append('mailingOpen')
     models.teleusers.query.filter_by(Id = userId).update({'Tags':user.Tags})
     db.session.add(newMailing)
@@ -197,3 +198,25 @@ def closeMailing(userId,closeDataTime):
         db.session.commit()
     except Exception as e:
         print(e)
+
+def checkMailing():
+    '''
+    Чекает, не пора бы отправлять рассылку
+    '''
+    mailings = models.mailinglist.query.filter_by(Done = False, isClosed = True).all()
+    tsn = int(datetime.now().timestamp())
+    for mailing in mailings:
+        if tsn<=mailing.UnixTimeToGo:
+            sendMailing(mailing)
+
+def sendMailing(mailing):
+    '''
+    Рассылает рассылку по списку
+    '''
+    #TODO Сделать ранжирование по тэгам
+    #TODO Добавить в рассылку кнопки и пр интерактив
+    #TODO Разбить на потоки
+
+    users = models.teleusers.query.all()
+    for user in users:
+        poster(bot,user.Id,Messages['text'],img=Messages['img'],doc= Messages['attach'])

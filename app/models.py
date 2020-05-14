@@ -32,3 +32,4 @@ class mailinglist(db.Model):
     UnixTimeToGo = db.Column(db.Integer)
     userCreator = db.Column(db.Integer)
     isClosed = db.Column(db.Boolean)
+    Done = db.Column(db.Boolean)

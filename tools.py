@@ -1,6 +1,17 @@
 from app import db
 from app import models
 from set import *
+from time import sleep
+from tele_bot_tools import *
+
+def checkTask():
+    '''
+    Проверяет есть ли задания, которые нужно выполнить
+    '''
+    checkMailing()
+    sleep(1)
+
+
 
 def msg_dwn_usr(productId):
     """
