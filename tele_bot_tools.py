@@ -195,6 +195,12 @@ def closeMailing(userId,closeDataTime):
         dt = datetime.combine(d, t)
         models.mailinglist.query.filter_by(userCreator = userId, isClosed = False).update({'UnixTimeToGo':int(dt.timestamp()),
                                                                                             'isClosed':True})
+        user = models.teleusers.query.filter_by(Id = userId).first()
+        try:
+            user.Tags.remove('mailingOpen')
+            models.teleusers.query.filter_by(Id = userId).update({'Tags':user.Tags})
+        except Exception as e:
+            pass
         db.session.commit()
     except Exception as e:
         print(e)
