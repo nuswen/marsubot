@@ -202,7 +202,8 @@ def closeMailing(userId,closeDataTime):
         except Exception as e:
             pass
         db.session.commit()
-        print(dt)
+        print(int(datetime.now().timestamp()))
+        print(int(dt.timestamp())
     except Exception as e:
         print(e)
 
