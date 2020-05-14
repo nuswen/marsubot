@@ -165,11 +165,11 @@ def toMailingMsgs(msg):
     print(msg)
     # В зависимости от типа сообщения создаём новое
     if msg.content_type == 'text':
-        newMsg = {numMsg:{'text':msg.text}}
+        newMsg = {numMsg:{'text':msg.text,'img':None,'attach':None}}
     elif msg.content_type == 'photo':
-        newMsg = {numMsg:{'text':'','img':'','attach':''}}
+        newMsg = {numMsg:{'text':msg.caption,'img':msg.photo[-1].file_id,'attach':''}}
     elif msg.content_type == 'document':
-        newMsg = {numMsg:{'text':'','img':'','attach':''}}
+        newMsg = {numMsg:{'text':msg.caption,'img':None,'attach':msg.document.file_id}}
 
     print(newMsg)
 
