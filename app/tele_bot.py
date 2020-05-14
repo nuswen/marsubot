@@ -39,7 +39,7 @@ def mailing(msg):
 def endMailing(msg):
     if isAdmin(msg.chat.id):
         print(msg)
-        closeMailing(msg.chat.id, msg.text)
+        closeMailing(msg.chat.id, msg.text[14:])
 
 
 @bot.message_handler(content_types=['text'])

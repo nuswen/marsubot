@@ -178,4 +178,21 @@ def toMailingMsgs(msg):
     print(newMsg)
 
 def closeMailing(userId,closeDataTime):
-    pass
+    '''
+    Закрывает сессию добавления постов к рассылке, указывает время отправки рассылки
+    '''
+    mailing = models.mailinglist.query.filter_by(userCreator = userId, isClosed = False).first()
+    # Делаем из входящего формата строки "час минуты день месяц" timestamp
+    closeDataTime = closeDataTime.split()
+    today = date.today()
+    curYear = today.timetuple()[0]
+    try:
+        t = time(int(a[0]),int(a[1]))
+        d = date(curYear,int(a[3]),int(a[2]))
+        if today > d:
+            d = date(curYear+1,int(a[3]),int(a[2]))
+        dt = datetime.combine(d, t)
+        models.mailinglist.query.filter_by(userCreator = userId, isClosed = False).update({'UnixTimeToGo':int(dt.timestamp()),
+                                                                                            'isClosed':True})
+    except e as Exception:
+        print(e)
