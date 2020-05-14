@@ -158,7 +158,7 @@ def toMailingMsgs(msg):
         numMsg = 0
     else:
         numMsg = []
-        for i in m:
+        for i in numMsg:
             numMsg.append(i)
         numMsg.sort()
         numMsg = numMsg[-1] + 1
@@ -167,9 +167,13 @@ def toMailingMsgs(msg):
     if msg.content_type == 'text':
         newMsg = {numMsg:{'text':msg.text,'img':None,'attach':None}}
     elif msg.content_type == 'photo':
-        newMsg = {numMsg:{'text':msg.caption,'img':msg.photo[-1].file_id,'attach':''}}
+        newMsg = {numMsg:{'text':msg.caption,'img':msg.photo[-1].file_id,'attach':None}}
     elif msg.content_type == 'document':
         newMsg = {numMsg:{'text':msg.caption,'img':None,'attach':msg.document.file_id}}
+
+    mailing.Messages.update(newMsg)
+    models.mailing.query.filter_by(userCreator = msg.chat.id, isClosed = False).update({'Messages':mailing.Messages})
+    db.session.commit()
 
     print(newMsg)
 
