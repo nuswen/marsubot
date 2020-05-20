@@ -141,6 +141,7 @@ def isAdmin(userId):
     return user.isAdmin
 
 def teleIn(msg):
+    print(msg)
     '''
     Разбирает куда отправить сообщение от пользователя
     '''
