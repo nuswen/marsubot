@@ -157,7 +157,7 @@ def teleIn(msg):
     if user.isOperator is False:
         operators = models.teleusers.query.filter_by(isOperator = True).all()
         for operator in operators:
-            poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
+            poster(bot, operator.Id, msg)
 
     
 
