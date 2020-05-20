@@ -4,7 +4,7 @@ from app import db
 import json
 import re
 from app import bot
-from tools import msg_start
+from tools import *
 from set import *
 from datetime import datetime,date,time
 
@@ -141,7 +141,7 @@ def isAdmin(userId):
     return user.isAdmin
 
 def teleIn(msg):
-    
+
     print(msg)
     '''
     Разбирает куда отправить сообщение от пользователя
@@ -218,36 +218,3 @@ def closeMailing(userId,closeDataTime):
         print(int(dt.timestamp()))
     except Exception as e:
         print(e)
-
-def checkMailing():
-    '''
-    Чекает, не пора бы отправлять рассылку
-    '''
-    print('work')
-    mailings = models.mailinglist.query.filter_by(Done = False, isClosed = True).all()
-    tsn = int(datetime.now().timestamp())
-    for mailing in mailings:
-        if tsn<=mailing.UnixTimeToGo:
-            sendMailing(mailing)
-
-def sendMailing(mailing):
-    '''
-    Рассылает рассылку по списку
-    '''
-    #TODO Сделать ранжирование по тэгам
-    #TODO Добавить в рассылку кнопки и пр интерактив
-    #TODO Разбить на потоки
-
-    users = models.teleusers.query.all()
-    order = []
-    for msgNum in mailing.Messages:
-        order.append(int(msgNum))
-    order.sort()
-
-    for user in users:
-        for i in order:
-            poster(bot,user.Id,mailing.Messages[str(i)]['text'],
-                    img=mailing.Messages[str(i)]['img'],
-                    doc=mailing.Messages[str(i)]['attach'])
-    models.mailinglist.query.filter_by(Id = mailing.Id).update({'Done':True})
-    db.session.commit()

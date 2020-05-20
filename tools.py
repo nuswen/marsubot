@@ -2,7 +2,8 @@ from app import db
 from app import models
 from set import *
 from time import sleep
-from tele_bot_tools import checkMailing
+from datetime import datetime,date,time
+
 
 def checkTask():
     '''
@@ -11,7 +12,38 @@ def checkTask():
     checkMailing()
     sleep(1)
 
+def checkMailing():
+    '''
+    Чекает, не пора бы отправлять рассылку
+    '''
+    print('work')
+    mailings = models.mailinglist.query.filter_by(Done = False, isClosed = True).all()
+    tsn = int(datetime.now().timestamp())
+    for mailing in mailings:
+        if tsn<=mailing.UnixTimeToGo:
+            sendMailing(mailing)
 
+def sendMailing(mailing):
+    '''
+    Рассылает рассылку по списку
+    '''
+    #TODO Сделать ранжирование по тэгам
+    #TODO Добавить в рассылку кнопки и пр интерактив
+    #TODO Разбить на потоки
+
+    users = models.teleusers.query.all()
+    order = []
+    for msgNum in mailing.Messages:
+        order.append(int(msgNum))
+    order.sort()
+
+    for user in users:
+        for i in order:
+            poster(bot,user.Id,mailing.Messages[str(i)]['text'],
+                    img=mailing.Messages[str(i)]['img'],
+                    doc=mailing.Messages[str(i)]['attach'])
+    models.mailinglist.query.filter_by(Id = mailing.Id).update({'Done':True})
+    db.session.commit()
 
 def msg_dwn_usr(productId):
     """
