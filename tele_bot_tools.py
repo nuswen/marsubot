@@ -159,7 +159,10 @@ def teleIn(msg):
     if user.isOperator is False:
         operators = models.teleusers.query.filter_by(isOperator = True).all()
         for operator in operators:
-            bot.forward_message(operator.Id, user.Id, msg.message_id)   
+            bot.forward_message(operator.Id, user.Id, msg.message_id)
+    elif user.isOperator is True:
+        if  True:
+            poster(bot,msg.json.reply_to_message.forward_from.id,msg.text)
 
 def toMailingMsgs(msg):
     '''
