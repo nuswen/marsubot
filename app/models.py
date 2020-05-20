@@ -7,7 +7,8 @@ class teleusers(db.Model):
     Tags = db.Column(ARRAY(db.Text))
     Tunels = db.Column(JSONB)
     LastAct = db.Column(db.Integer)
-    isAdmin= db.Column(db.Boolean)
+    isAdmin = db.Column(db.Boolean)
+    isOperator = db.Column(db.Boolean)
 
 class messages(db.Model):
     Id = db.Column(db.Integer, primary_key=True)

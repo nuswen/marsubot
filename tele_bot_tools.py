@@ -4,6 +4,7 @@ from app import db
 import json
 import re
 from app import bot
+from tools import msg_start
 from set import *
 from datetime import datetime,date,time
 
@@ -108,7 +109,8 @@ def new_tele_user(usrId):
                                 Tags = [],
                                 Tunels = {},
                                 LastAct = int(datetime.now().timestamp()),
-                                isAdmin = False)
+                                isAdmin = False,
+                                isOperator = False)
     db.session.add(newUser)
     db.session.commit()
     return 'start'
@@ -144,10 +146,20 @@ def teleIn(msg):
     '''
     # Смотрим что за пользователь
     user = models.teleusers.query.filter_by(Id = msg.chat.id).first()
+    if not user:
+        poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
     # Проходимся по тегам
     for tag in user.Tags:
         if tag == 'mailingOpen': #  Если у юзера открыта сессия составления рассылки
             toMailingMsgs(msg)
+            return
+    # Если некуда деть сообщение считаем, что оно предназначено оператору
+    if user.isOperator is False:
+        operators = models.teleusers.query.filter_by(isOperator = True).all()
+        for operator in operators:
+            poster(bot, msg.chat.id, msg_start(new_tele_user(msg.chat.id)))
+
+    
 
 def toMailingMsgs(msg):
     '''
