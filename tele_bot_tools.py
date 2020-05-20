@@ -162,7 +162,7 @@ def teleIn(msg):
             bot.forward_message(operator.Id, user.Id, msg.message_id)
     elif user.isOperator is True:
         if  True:
-            poster(bot,msg.json.reply_to_message.forward_from.id,msg.text)
+            poster(bot,msg.json['reply_to_message']['forward_from']['id'],msg.text)
 
 def toMailingMsgs(msg):
     '''
