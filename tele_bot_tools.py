@@ -141,6 +141,7 @@ def isAdmin(userId):
     return user.isAdmin
 
 def teleIn(msg):
+    
     print(msg)
     '''
     Разбирает куда отправить сообщение от пользователя
@@ -158,9 +159,7 @@ def teleIn(msg):
     if user.isOperator is False:
         operators = models.teleusers.query.filter_by(isOperator = True).all()
         for operator in operators:
-            bot.forward_message(operator.Id, user.Id, msg.message_id)
-
-    
+            bot.forward_message(operator.Id, user.Id, msg.message_id)   
 
 def toMailingMsgs(msg):
     '''
@@ -252,4 +251,3 @@ def sendMailing(mailing):
                     doc=mailing.Messages[str(i)]['attach'])
     models.mailinglist.query.filter_by(Id = mailing.Id).update({'Done':True})
     db.session.commit()
-

@@ -2,7 +2,7 @@ from app import db
 from app import models
 from set import *
 from time import sleep
-from tele_bot_tools import *
+from tele_bot_tools import checkMailing
 
 def checkTask():
     '''
