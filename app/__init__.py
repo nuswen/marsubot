@@ -32,6 +32,37 @@ def verify():
         print('wrong verification token')
         return "Error, Verification Failed"
 
+@app.route('/facebookwebhook/', methods=['POST'])
+def handle_messages():
+    data = request.get_json()
+    print(data)
+    entry = data['entry'][0]
+    if entry.get("messaging"):
+        messaging_event = entry['messaging'][0]
+        sender_id = messaging_event['sender']['id']
+        message_text = messaging_event['message']['text']
+        send_text_message(sender_id, message_text)
+    return 'ok', 200
+
+def send_text_message(recipient_id, message):
+    data = json.dumps({
+        "recipient": {"id": recipient_id},
+        "message": {"text": message}
+    })
+ 
+    params = {
+        "access_token": <PAGE_ACCESS_TOKEN>
+    }
+ 
+    headers = {
+        "Content-Type": "application/json"
+    }
+ 
+    r = requests.post(
+        "https://graph.facebook.com/v7.0/me/messages",
+        params=params, headers=headers, data=data
+    )
+
 @app.route("/"+environ['token'], methods=['POST'])
 def getMessage():
     bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
