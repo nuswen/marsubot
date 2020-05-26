@@ -10,6 +10,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = environ['DATABASE_URL']
 db = SQLAlchemy(app)
 
+
 from app import tele_bot, models
 
 @app.before_first_request
@@ -21,6 +22,15 @@ def activate_job():
 
     thread = threading.Thread(target=checkTask_worker)
     thread.start()
+
+@app.route('/facebookwebhook/', methods=['GET'])
+def verify():
+    if (request.args.get('hub.verify_token', '') == environ['facebook_verify_token']):
+        print("Verified")
+        return request.args.get('hub.challenge', '')
+    else:
+        print('wrong verification token')
+        return "Error, Verification Failed"
 
 @app.route("/"+environ['token'], methods=['POST'])
 def getMessage():

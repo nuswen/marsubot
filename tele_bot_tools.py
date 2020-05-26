@@ -156,6 +156,9 @@ def teleIn(msg):
             toMailingMsgs(msg)
             return
     # Если некуда деть сообщение считаем, что оно предназначено оператору
+    #TODO сделать разбиение по оператором, если клиента что-то берёт
+    #TODO вести историю переписки
+    #TODO веб версию с разделением на чаты
     if user.isOperator is False:
         operators = models.teleusers.query.filter_by(isOperator = True).all()
         for operator in operators:
