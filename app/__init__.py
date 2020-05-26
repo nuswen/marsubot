@@ -3,6 +3,8 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 import telebot
 import threading
+import json
+import requests
 
 bot = telebot.TeleBot(environ['token'])
 
@@ -51,7 +53,7 @@ def send_text_message(recipient_id, message):
     })
  
     params = {
-        "access_token": <PAGE_ACCESS_TOKEN>
+        "access_token": environ['facebook_token']
     }
  
     headers = {
