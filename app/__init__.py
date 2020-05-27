@@ -26,7 +26,7 @@ def activate_job():
     thread.start()
 
 @app.route('/facebookbot/privacy/', methods=['GET'])
-def verify():
+def privacy():
     privacy_file = open('privacy.txt')
     return privacy_file.read()
 
