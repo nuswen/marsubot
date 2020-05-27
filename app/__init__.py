@@ -25,6 +25,11 @@ def activate_job():
     thread = threading.Thread(target=checkTask_worker)
     thread.start()
 
+@app.route('/facebookbot/privacy/', methods=['GET'])
+def verify():
+    privacy_file = open('privacy.txt')
+    return privacy_file.read()
+
 @app.route('/facebookwebhook/', methods=['GET'])
 def verify():
     if (request.args.get('hub.verify_token', '') == environ['facebook_verify_token']):
