@@ -32,6 +32,7 @@ def privacy():
 
 @app.route('/facebookwebhook/', methods=['GET'])
 def verify():
+    print(request)
     if (request.args.get('hub.verify_token', '') == environ['facebook_verify_token']):
         print("Verified")
         return request.args.get('hub.challenge', '')
