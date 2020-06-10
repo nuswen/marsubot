@@ -43,8 +43,9 @@ def verify():
 @app.route('/facebookwebhook/', methods=['POST'])
 def handle_messages():
     data = request.get_json()
-    print(type(data))
     entry = data['entry'][0]
+    print(entry)
+
     if entry.get("messaging"):
         messaging_event = entry['messaging'][0]
         sender_id = messaging_event['sender']['id']
