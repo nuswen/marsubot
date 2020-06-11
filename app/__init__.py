@@ -27,7 +27,12 @@ def activate_job():
 
 @app.route('/facebookbot/test/', methods=['GET'])
 def test():
-    send_text_message('2241087689304329', 'message_text')
+    btns = {
+            "type":"postback",
+            "title":"<BUTTON_TEXT>",
+            "payload":"<DEVELOPER_DEFINED_PAYLOAD>"
+            }
+    send_text_message('2241087689304329', 'message_text',buttons=btns)
 
 @app.route('/facebookbot/privacy/', methods=['GET'])
 def privacy():
@@ -60,14 +65,10 @@ def handle_messages():
             print(messaging_event)
     return 'ok', 200
 
-def send_text_message(recipient_id, message):
+def send_text_message(recipient_id, message, buttons=None):
     data = json.dumps({
         "recipient": {"id": recipient_id},
-        "message": {"text": message}
-        "buttons":{"type": "postback",
-                    "title": "<BUTTON_TEXT>",
-                    "payload": "<STRING_SENT_TO_WEBHOOK>"}
-                    })
+        "message": {"text": message,"buttons":buttons})
  
     params = {
         "access_token": environ['facebook_token']
