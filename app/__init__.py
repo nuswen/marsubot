@@ -49,8 +49,11 @@ def handle_messages():
     if entry.get("messaging"):
         messaging_event = entry['messaging'][0]
         sender_id = messaging_event['sender']['id']
-        message_text = messaging_event['message']['text']
-        send_text_message(sender_id, message_text)
+        if messaging_event.get("message"):
+            message_text = messaging_event['message']['text']
+            send_text_message(sender_id, message_text)
+        else:
+            print(messaging_event)
     return 'ok', 200
 
 def send_text_message(recipient_id, message):
