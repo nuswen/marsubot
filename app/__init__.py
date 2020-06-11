@@ -6,6 +6,8 @@ import threading
 import json
 import requests
 
+a = 0
+
 bot = telebot.TeleBot(environ['token'])
 
 app = Flask(__name__)
@@ -46,12 +48,13 @@ def handle_messages():
     entry = data['entry'][0]
     print(data)
 
-    # if entry.get("messaging"):
-    #     messaging_event = entry['messaging'][0]
-    #     sender_id = messaging_event['sender']['id']
-    #     print(messaging_event)
-    #     message_text = messaging_event['message']['text']
-    #     send_text_message(sender_id, message_text)
+    if entry.get("messaging"):
+        messaging_event = entry['messaging'][0]
+        sender_id = messaging_event['sender']['id']
+        message_text = messaging_event['message']['text']
+        if a < 2:
+            send_text_message(sender_id, message_text)
+            a =+ 1
     return 'ok', 200
 
 def send_text_message(recipient_id, message):
