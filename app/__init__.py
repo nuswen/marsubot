@@ -64,7 +64,10 @@ def send_text_message(recipient_id, message):
     data = json.dumps({
         "recipient": {"id": recipient_id},
         "message": {"text": message}
-    })
+        "buttons":{"type": "postback",
+                    "title": "<BUTTON_TEXT>",
+                    "payload": "<STRING_SENT_TO_WEBHOOK>"}
+                    })
  
     params = {
         "access_token": environ['facebook_token']
