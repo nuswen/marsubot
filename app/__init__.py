@@ -69,7 +69,7 @@ def handle_messages():
 def send_text_message(recipient_id, message, buttons=None):
     data = json.dumps({
         "recipient": {"id": recipient_id},
-        "message": {"text": message,"buttons":buttons})
+        "message": {"text": message,"buttons":buttons}})
  
     params = {
         "access_token": environ['facebook_token']
