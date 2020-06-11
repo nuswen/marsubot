@@ -25,6 +25,10 @@ def activate_job():
     thread = threading.Thread(target=checkTask_worker)
     thread.start()
 
+@app.route('/facebookbot/test/', methods=['GET'])
+def test():
+    send_text_message('2241087689304329', 'message_text')
+
 @app.route('/facebookbot/privacy/', methods=['GET'])
 def privacy():
     privacy_file = open('privacy.txt')
