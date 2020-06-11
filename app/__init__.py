@@ -33,6 +33,7 @@ def test():
             "payload":"<DEVELOPER_DEFINED_PAYLOAD>"
             }
     send_text_message('2241087689304329', 'message_text',buttons=btns)
+    return "200"
 
 @app.route('/facebookbot/privacy/', methods=['GET'])
 def privacy():
